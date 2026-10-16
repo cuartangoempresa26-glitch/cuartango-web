@@ -1,0 +1,19 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Reservas | Cuartango</title><meta name="description" content="Reserva tu mesa en Cuartango Las Palmas o Vecindario.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500&display=swap"><link rel="icon" href="img/logo-light.png"><link rel="stylesheet" href="css/styles.css">
+<script src="js/data.js"></script></head>
+<body data-page="reservas"><main><section><div class="wrap" style="max-width:640px"><h1>Reservar mesa</h1>
+<p class="muted">Demostración: la disponibilidad es simulada. Más adelante se conectará con Google Calendar.</p>
+<form id="book-form" class="card">
+  <label for="b-venue">Local</label><select id="b-venue"><option value="las-palmas">Local Las Palmas</option><option value="vecindario">Nuevo Local Vecindario</option></select>
+  <label for="b-date">Fecha</label><input id="b-date" type="date" required>
+  <label for="b-party">Personas</label><select id="b-party"></select>
+  <label>Hora</label><div id="b-slots" class="slots"></div>
+  <label for="b-name">Nombre</label><input id="b-name" required autocomplete="name">
+  <label for="b-phone">Teléfono</label><input id="b-phone" type="tel" required autocomplete="tel">
+  <label for="b-email">Email</label><input id="b-email" type="email" required autocomplete="email">
+  <label for="b-notes">Notas (alergias, celebración…)</label><textarea id="b-notes" rows="3"></textarea>
+  <p><button id="b-submit" class="btn" disabled>Confirmar reserva</button></p>
+</form><div id="b-result"></div></div></section></main>
+<script>for(let i=1;i<=10;i++)document.getElementById('b-party').add(new Option(i+(i>1?' personas':' persona'),i));</script>
+<script src="js/app.js"></script></body></html>
