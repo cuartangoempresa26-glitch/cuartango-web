@@ -1,0 +1,9 @@
+functions
+docs
+serve.cjs
+README.md
+wrangler.jsonc
+worker.js
+.assetsignore
+.claude
+.gitignore

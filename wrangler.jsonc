@@ -1,0 +1,10 @@
+{
+  "name": "cuartango-web",
+  "main": "worker.js",
+  "compatibility_date": "2025-09-01",
+  "assets": { "directory": "./", "binding": "ASSETS" },
+  "vars": {
+    "CONTACT_TO": "info@cuartango.com",
+    "MAIL_FROM": "Cuartango Web <web@cuartango.com>"
+  }
+}
