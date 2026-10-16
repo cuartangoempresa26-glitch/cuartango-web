@@ -7,3 +7,5 @@ worker.js
 .assetsignore
 .claude
 .gitignore
+tools
+package.json
