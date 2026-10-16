@@ -5,6 +5,9 @@ Sitio estático (HTML/CSS/JS) + una función serverless para el formulario de ca
 ## Ver en local
 `node serve.cjs` (en esta carpeta) y abrir http://localhost:8080. En local el formulario solo registra la consulta en la consola del servidor; no envía correo.
 
+## Reservas, reseñas y correos
+Ver [docs/Activar-reservas-y-resenas.md](docs/Activar-reservas-y-resenas.md). El código está listo; faltan las claves de Google y Resend en Cloudflare.
+
 ## Dónde editar
 - `js/data.js`: locales, carta, especiales, reseñas de ejemplo.
 - `js/catering-data.js`: menús, precios y condiciones del catering (del dossier).

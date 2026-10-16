@@ -7,6 +7,7 @@
     { "pattern": "www.cuartango.com", "custom_domain": true }
   ],
   "assets": { "directory": "./", "binding": "ASSETS", "run_worker_first": true },
+  "triggers": { "crons": ["0 * * * *"] },
   "vars": {
     "CONTACT_TO": "info@cuartango.com",
     "MAIL_FROM": "Cuartango Web <web@cuartango.com>"

@@ -91,38 +91,4 @@
       .map((s) => `<div class="specials"><h3>${esc(s.title)}</h3><p>${esc(s.text)}</p></div>`).join("");
   }
 
-  // ---------- booking (front-end demo only) ----------
-  const bf = $("#book-form");
-  if (bf) {
-    const params = new URLSearchParams(location.search);
-    const venueSel = $("#b-venue"), dateIn = $("#b-date"), partyIn = $("#b-party"), slotsEl = $("#b-slots"), submit = $("#b-submit");
-    if (params.get("local") && D.venues[params.get("local")]) venueSel.value = params.get("local");
-    const today = new Date(); const iso = (d) => d.toISOString().slice(0, 10);
-    dateIn.min = iso(today); dateIn.value = iso(today);
-    let chosen = "";
-    const hash = (s) => [...s].reduce((a, c) => (a * 31 + c.charCodeAt(0)) >>> 0, 7);
-    const renderSlots = () => {
-      chosen = ""; submit.disabled = true;
-      const v = D.venues[venueSel.value]; let base = ["13:00", "13:30", "14:00", "14:30", "15:00", "20:00", "20:30", "21:00", "21:30", "22:00"];
-      if (v.hours) { const day = new Date(dateIn.value + "T12:00:00").getDay(); base = [];
-        (v.hours[day] || []).forEach(([o, c]) => { for (let t = mins(o); t <= mins(c) - D.lastSeatingMinutesBeforeClose; t += 30) base.push(String(Math.floor(t / 60)).padStart(2, "0") + ":" + String(t % 60).padStart(2, "0")); });
-        if (!base.length) { slotsEl.innerHTML = '<p class="muted">Cerrado este día. Elige otra fecha.</p>'; return; } }
-      slotsEl.innerHTML = base.map((t) => {
-        const free = 24 - (hash(venueSel.value + dateIn.value + t) % 20); // fake seats left
-        const ok = free >= Number(partyIn.value);
-        return `<button type="button" data-t="${t}" ${ok ? "" : "disabled"}>${t}</button>`;
-      }).join("");
-    };
-    slotsEl.addEventListener("click", (e) => { const b = e.target.closest("button"); if (!b || b.disabled) return; chosen = b.dataset.t;
-      slotsEl.querySelectorAll("button").forEach((x) => x.classList.toggle("on", x === b)); submit.disabled = false; });
-    [venueSel, dateIn, partyIn].forEach((el) => el.addEventListener("change", renderSlots));
-    renderSlots();
-    bf.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const v = D.venues[venueSel.value];
-      $("#b-result").innerHTML = `<div class="ok"><strong>Reserva de prueba recibida</strong><br>${esc(v.name)} · ${dateIn.value} · ${chosen} · ${partyIn.value} personas<br>
-        <span class="muted">Esto es una demostración: aún no se guarda ni se envía correo. Cuando conectemos Google Calendar, aquí aparecerá la confirmación real.</span></div>`;
-      $("#b-result").scrollIntoView({ behavior: "smooth", block: "center" });
-    });
-  }
 })();

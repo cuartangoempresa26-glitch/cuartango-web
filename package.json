@@ -1,0 +1,9 @@
+{
+  "name": "cuartango-web",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node tools/test-booking.mjs",
+    "seo": "node tools/build-seo.cjs"
+  }
+}
