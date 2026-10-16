@@ -5,6 +5,8 @@
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const slug = (s) => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
+  const playVideo = !matchMedia("(prefers-reduced-motion: reduce)").matches && !(navigator.connection && navigator.connection.saveData);
+
   // ----- venue panels -----
   const vp = $("#vpanels");
   if (vp) {
@@ -13,6 +15,7 @@
       const open = (CT.openStatus && CT.openStatus(v)) || '<span class="badge">Horario próximamente</span>';
       return `<article class="vpanel" data-v="${k}" tabindex="0" aria-label="${esc(h.tag)}">
         <div class="vp-bg${h.photo ? "" : " nophoto"}"${h.photo ? ` style="background-image:url('${h.photo}')"` : ""}></div>
+        ${h.video && playVideo ? `<video class="vp-video" muted loop playsinline autoplay preload="metadata" poster="${h.photo}" aria-hidden="true"><source src="${h.video}" type="video/mp4"></video>` : ""}
         <div class="vp-shade"></div>
         <div class="vp-in">
           <span class="vp-tag">${esc(h.tag)}</span>

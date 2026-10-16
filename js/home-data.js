@@ -5,7 +5,8 @@ window.HOME = {
     "las-palmas": {
       tag: "Local Las Palmas",
       title: "Donde el fuego es tradición",
-      photo: "img/las-palmas-sala-poster.jpg",
+      photo: "img/las-palmas-parrillada-poster.jpg",
+      video: "img/las-palmas-parrillada.mp4",
       chips: ["Parrilla argentina", "Rooftop bar", "Terraza", "Catering"],
       body: "Nuestro local de Las Palmas es el hogar de la parrilla argentina: entraña, vacío y costillar a la brasa, en su punto y con la paciencia de los parrilleros de verdad. Un espacio cuidado, con terraza y rooftop bar, para comer sin prisa. Ideal para una comida de domingo, una cena especial o un brindis en la azotea."
     },
