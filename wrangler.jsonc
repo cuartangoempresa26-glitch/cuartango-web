@@ -2,7 +2,10 @@
   "name": "cuartango-web",
   "main": "worker.js",
   "compatibility_date": "2025-09-01",
-  "routes": [{ "pattern": "www.cuartango.com", "custom_domain": true }],
+  "routes": [
+    { "pattern": "cuartango.com", "custom_domain": true },
+    { "pattern": "www.cuartango.com", "custom_domain": true }
+  ],
   "assets": { "directory": "./", "binding": "ASSETS" },
   "vars": {
     "CONTACT_TO": "info@cuartango.com",
