@@ -15,9 +15,9 @@ window.CUARTANGO = {
       phone: "+34 656 441 966",
       maps: "https://www.google.com/maps/search/?api=1&query=C.+Jos%C3%A9+Franchy+Roca+9+35007+Las+Palmas+de+Gran+Canaria",
       mapEmbed: "https://www.google.com/maps?q=C.+Jos%C3%A9+Franchy+Roca+9+35007+Las+Palmas+de+Gran+Canaria&output=embed",
-      // 0=Sunday ... 6=Saturday. Times in Atlantic/Canary. Source: current Google listing (2026-10-16).
+      // 0=Sunday ... 6=Saturday. Times in Atlantic/Canary. Source: Google Maps listing, checked 2026-10-17.
       hours: { 0: [["13:00","17:00"]], 1: [], 2: [["13:00","17:00"],["20:00","23:00"]], 3: [["13:00","17:00"],["20:00","23:00"]],
-               4: [["13:00","16:30"],["20:00","23:00"]], 5: [["13:00","16:30"]], 6: [["13:00","17:00"],["20:00","23:00"]] },
+               4: [["13:00","16:30"],["20:00","23:00"]], 5: [["13:00","16:30"],["20:00","23:00"]], 6: [["13:00","17:00"],["20:00","23:00"]] },
       services: ["Parrilla a la brasa", "En el local", "Para llevar", "Delivery", "Catering", "Buffet", "Eventos privados", "Bodas", "Terraza exterior", "Rooftop bar", "Zona de fumadores", "Wi-Fi gratis"],
       payments: "Visa, Mastercard, Amex, débito, efectivo, contactless, Apple Pay",
       order: { glovo: null, uber: null } // paste the venue links here; buttons appear automatically
@@ -31,7 +31,7 @@ window.CUARTANGO = {
       mapEmbed: "https://www.google.com/maps?q=Calle+Granada+22+Balos+Vecindario&output=embed",
       // PROVISIONAL: same hours as Las Palmas until the client sends the real ones
       hours: { 0: [["13:00","17:00"]], 1: [], 2: [["13:00","17:00"],["20:00","23:00"]], 3: [["13:00","17:00"],["20:00","23:00"]],
-               4: [["13:00","16:30"],["20:00","23:00"]], 5: [["13:00","16:30"]], 6: [["13:00","17:00"],["20:00","23:00"]] },
+               4: [["13:00","16:30"],["20:00","23:00"]], 5: [["13:00","16:30"],["20:00","23:00"]], 6: [["13:00","17:00"],["20:00","23:00"]] },
       services: [], // TODO (este local no tiene parrilla)
       payments: null,
       order: { glovo: null, uber: null }

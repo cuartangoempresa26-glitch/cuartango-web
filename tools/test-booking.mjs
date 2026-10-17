@@ -53,7 +53,7 @@ ok(!r.slots.some((s) => s.time === "16:30"), "no slot in the last hour before cl
 r = await (await get(`venue=las-palmas&date=${mon}&party=2`)).json();
 ok(r.closed === true && r.slots.length === 0, "Monday closed");
 r = await (await get(`venue=las-palmas&date=${fri}&party=2`)).json();
-ok(r.slots.every((s) => s.time < "16:00"), "Friday lunch only");
+ok(r.slots.some((s) => s.time === "13:00") && r.slots.some((s) => s.time === "22:00") && !r.slots.some((s) => s.time === "16:30" || s.time === "17:00"), "Friday: lunch (until 16:30) and dinner (20:00-23:00)");
 r = await (await get(`venue=vecindario&date=${tue}&party=2`)).json();
 ok(r.enabled === true && r.slots.length === 7 + 5, "Vecindario open for online booking (provisional Las Palmas hours)");
 { // Vecindario bookings go to its own calendar and do not use Las Palmas seats
