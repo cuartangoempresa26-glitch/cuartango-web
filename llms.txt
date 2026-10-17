@@ -14,5 +14,6 @@
 ## Servicios
 - Reservas online (hasta 10 personas): https://cuartango.com/reservas
 - Carta con precios: https://cuartango.com/menu
+- Celebraciones y eventos en nuestros locales (cumpleaños, reuniones, cenas de empresa): https://cuartango.com/eventos
 - Catering argentino con parrillero (menús desde 40 € por persona, mínimo 25 comensales): https://cuartango.com/catering
 - Contacto: info@cuartango.com

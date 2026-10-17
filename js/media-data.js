@@ -18,5 +18,6 @@ window.MEDIA = {
     { src: "img/las-palmas-sirviendo.jpg", alt: "Camarero llevando la parrillada a la mesa", caption: "Servida en la mesa", pos: "60% 50%" }
   ] },
   vecindario: { gallery: [] },
+  eventos: { triptych: [], gallery: [] },
   catering: { triptych: [], gallery: [] }
 };

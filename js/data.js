@@ -32,8 +32,8 @@ window.CUARTANGO = {
       // PROVISIONAL: same hours as Las Palmas until the client sends the real ones
       hours: { 0: [["13:00","17:00"]], 1: [], 2: [["13:00","17:00"],["20:00","23:00"]], 3: [["13:00","17:00"],["20:00","23:00"]],
                4: [["13:00","16:30"],["20:00","23:00"]], 5: [["13:00","16:30"],["20:00","23:00"]], 6: [["13:00","17:00"],["20:00","23:00"]] },
-      services: ["Terraza exterior cubierta"], // TODO: completar el resto de servicios (este local no tiene parrilla)
-      payments: null,
+      services: ["Delivery", "Terraza exterior cubierta"], // TODO: completar el resto de servicios (este local no tiene parrilla)
+      payments: "Visa, Mastercard, Amex, débito, efectivo, contactless, Apple Pay", // mismos medios de pago que Las Palmas (indicado por el cliente)
       order: { glovo: null, uber: null }
     }
   },

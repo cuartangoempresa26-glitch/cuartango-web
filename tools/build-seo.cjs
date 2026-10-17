@@ -77,6 +77,10 @@ const cateringService = clean({ '@type': 'Service', '@id': SITE + '/catering#ser
   description: C.intro, offers: C.menus.map((m) => ({ '@type': 'Offer', name: m.name, priceCurrency: 'EUR',
     priceSpecification: { '@type': 'UnitPriceSpecification', price: m.price, priceCurrency: 'EUR', unitText: 'por persona' } })) });
 
+const eventService = clean({ '@type': 'Service', '@id': SITE + '/eventos#service', serviceType: 'Celebraciones y eventos privados en restaurante',
+  name: 'Festeja tu evento en ' + BRAND, provider: { '@id': SITE + '/#org' }, areaServed: { '@type': 'AdministrativeArea', name: 'Gran Canaria' },
+  description: 'Cumpleaños, reuniones y celebraciones en los locales de Cuartango Argentina en Las Palmas de Gran Canaria y Vecindario.' });
+
 // ---------- visible text: about + FAQ (only facts that are in the data/dossier) ----------
 const LP = D.venues['las-palmas'], VC = D.venues['vecindario'];
 const minMilanesa = Math.min(...D.menus.vecindario.sections.find((s) => s.id === 'milanesas').items.filter((i) => !/Guarnici/.test(i.name)).map((i) => Number(price(i.price))));
@@ -90,7 +94,8 @@ const faqHome = [
   ['¿Hay parrilla argentina en los dos locales?', 'La parrilla está en el local de Las Palmas. El local de Vecindario no tiene parrilla: allí la especialidad son las milanesas, los entrepanes y el sándwich de vacío al disco.'],
   ['¿Se puede reservar mesa?', 'Sí. Puedes <a href="reservas.html">reservar online</a> eligiendo local, día, hora y número de personas, y recibes la confirmación por correo. Hasta 10 personas por internet; para grupos mayores, escríbenos a ' + D.email + '.'],
   ['¿Hacéis catering argentino a domicilio en Gran Canaria?', `Sí. Llevamos la parrilla a tu celebración, con parrillero profesional, montaje en el lugar y camareros. Menús desde ${cheapest} € por persona, para un mínimo de 25 comensales. <a href="catering.html">Pide tu presupuesto</a>.`],
-  ['¿Se puede pedir para llevar o a domicilio?', 'En el local de Las Palmas sí: servimos para llevar y a domicilio.']
+  ['¿Se puede pedir para llevar o a domicilio?', 'Sí. Hacemos delivery desde los dos locales, el de Las Palmas y el de Vecindario, y en Las Palmas también para llevar.'],
+  ['¿Se puede celebrar un cumpleaños o un evento en Cuartango Argentina?', 'Sí. Puedes <a href="eventos.html">festejar tu cumpleaños, una reunión o una cena de empresa en nuestros locales</a> de Las Palmas y Vecindario: cuéntanos el local, la fecha y cuántos sois y te respondemos con una propuesta a medida.']
 ];
 
 const faqLP = [
@@ -107,8 +112,17 @@ const faqVC = [
   ['¿Tiene parrilla el local de Vecindario?', 'No. El local de Vecindario no tiene parrilla; está pensado para las milanesas, los entrepanes y el sándwich de vacío al disco. Si buscas parrilla argentina, está en el <a href="las-palmas.html">local de Las Palmas</a>.'],
   ['¿Qué milanesas tienen en Vecindario?', `Napolitana, fugazzeta, a caballo, criolla, caprese y La Porteña (con salsa picante y jalapeños), todas de ternera empanada y desde ${fmtEuro(minMilanesa)}.`],
   ['¿Qué es el sándwich de vacío al disco?', 'Vacío de ternera desmenuzado al disco de arado y ahumado durante 6 horas al fuego de leña, que se sirve como sándwich y se personaliza con toppings (jalapeño, cebolla morada, chimichurri, criolla, queso de cabra, provolone o cheddar).'],
+  ['¿Hacen delivery en Vecindario?', 'Sí, el local de Vecindario tiene servicio de delivery.'],
+  ['¿Cómo se puede pagar en Vecindario?', 'Con ' + VC.payments + '.'],
   ['¿Tiene terraza el local de Vecindario?', 'Sí, el local de Vecindario tiene terraza exterior cubierta.'],
   ['¿Se puede reservar mesa en Vecindario?', 'Sí, <a href="reservas.html?local=vecindario">reserva online</a> eligiendo día, hora y personas; recibes la confirmación por correo.']
+];
+const faqEventos = [
+  ['¿Se puede celebrar un cumpleaños en Cuartango Argentina?', 'Sí. Puedes festejar tu cumpleaños, una cena con amigos, una reunión familiar o una comida de empresa en nuestros locales de Las Palmas y Vecindario. Cuéntanos el local, la fecha y cuántas personas sois y te respondemos con una propuesta a tu medida.'],
+  ['¿En qué local puedo hacer mi evento?', 'En cualquiera de los dos. En <a href="las-palmas.html">Las Palmas</a> está la parrilla argentina, con terraza exterior y eventos privados; en <a href="vecindario.html">Vecindario</a> están las milanesas, los entrepanes y el sándwich de vacío al disco, con terraza exterior cubierta.'],
+  ['¿Cómo armo mi evento?', 'Rellena el formulario de esta página con el local, la fecha, el número de personas y lo que quieres celebrar. Te respondemos por correo o teléfono con una propuesta; no hay compromiso.'],
+  ['¿Puedo reservar mesa para un grupo?', 'Sí. Hasta 10 personas puedes <a href="reservas.html">reservar online</a>. Para grupos mayores o celebraciones, usa el formulario de eventos o escríbenos a ' + D.email + '.'],
+  ['¿Y si prefiero el evento en mi casa o en otro lugar?', 'Hacemos <a href="catering.html">catering argentino con parrillero</a> y llevamos la parrilla a tu celebración, desde ' + cheapest + ' € por persona.']
 ];
 const faqCatering = [
   ['¿Cuánto cuesta el catering argentino de Cuartango Argentina?', `Hay tres menús con parrillero: ${C.menus.map((m) => `${m.name} (${m.price} € por persona)`).join(', ')}. Si pides factura, el IVA/IGIC no está incluido.`],
@@ -144,6 +158,9 @@ const pages = {
   'catering.html': { path: '/catering', name: 'Catering', title: 'Catering argentino en Gran Canaria | ' + BRAND,
     desc: `Catering argentino personalizado con parrillero y parrilla in situ en Gran Canaria: bodas, cumpleaños y eventos. Menús desde ${cheapest} € por persona.`,
     img: 'img/las-palmas-parrillada.jpg', faq: faqCatering, ld: [organization, cateringService] },
+  'eventos.html': { path: '/eventos', name: 'Eventos', title: 'Festeja tu evento en nuestros locales | ' + BRAND,
+    desc: 'Arma tu cumpleaños, reunión o celebración en Cuartango Argentina, en Las Palmas o en Vecindario (Gran Canaria). Cuéntanos tu evento y te preparamos una propuesta.',
+    img: 'img/las-palmas-sirviendo.jpg', faq: faqEventos, ld: [organization, eventService] },
   'reservas.html': { path: '/reservas', name: 'Reservas', title: 'Reservar mesa | ' + BRAND,
     desc: 'Reserva tu mesa online en ' + BRAND + ' Las Palmas o ' + BRAND + ' Vecindario. Confirmación por correo.',
     img: 'img/las-palmas-sirviendo.jpg', ld: [organization] }
@@ -197,6 +214,7 @@ fs.writeFileSync(path.join(root, 'llms.txt'), `# ${BRAND}
 ## Servicios
 - Reservas online (hasta 10 personas): ${SITE}/reservas
 - Carta con precios: ${SITE}/menu
+- Celebraciones y eventos en nuestros locales (cumpleaños, reuniones, cenas de empresa): ${SITE}/eventos
 - Catering argentino con parrillero (menús desde ${cheapest} € por persona, mínimo 25 comensales): ${SITE}/catering
 - Contacto: ${D.email}
 `);
