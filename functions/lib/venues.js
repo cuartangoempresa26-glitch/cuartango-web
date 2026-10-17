@@ -24,6 +24,8 @@ export const VENUES = {
     phone: null,
     calendarVar: "CALENDAR_ID_VECINDARIO",
     seats: 30, // assumption
-    hours: null // unknown yet: online booking stays disabled until hours are provided
+    // PROVISIONAL: same hours as Las Palmas until the client sends the real ones
+    hours: { 0: [["13:00", "17:00"]], 1: [], 2: [["13:00", "17:00"], ["20:00", "23:00"]], 3: [["13:00", "17:00"], ["20:00", "23:00"]],
+             4: [["13:00", "16:30"], ["20:00", "23:00"]], 5: [["13:00", "16:30"]], 6: [["13:00", "17:00"], ["20:00", "23:00"]] }
   }
 };

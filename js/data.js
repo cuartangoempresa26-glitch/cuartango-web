@@ -29,7 +29,9 @@ window.CUARTANGO = {
       phone: null,   // TODO
       maps: "https://www.google.com/maps/search/?api=1&query=Calle+Granada+22+Balos+Vecindario",
       mapEmbed: "https://www.google.com/maps?q=Calle+Granada+22+Balos+Vecindario&output=embed",
-      hours: null,
+      // PROVISIONAL: same hours as Las Palmas until the client sends the real ones
+      hours: { 0: [["13:00","17:00"]], 1: [], 2: [["13:00","17:00"],["20:00","23:00"]], 3: [["13:00","17:00"],["20:00","23:00"]],
+               4: [["13:00","16:30"],["20:00","23:00"]], 5: [["13:00","16:30"]], 6: [["13:00","17:00"],["20:00","23:00"]] },
       services: [], // TODO (este local no tiene parrilla)
       payments: null,
       order: { glovo: null, uber: null }

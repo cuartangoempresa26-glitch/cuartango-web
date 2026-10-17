@@ -55,7 +55,13 @@ ok(r.closed === true && r.slots.length === 0, "Monday closed");
 r = await (await get(`venue=las-palmas&date=${fri}&party=2`)).json();
 ok(r.slots.every((s) => s.time < "16:00"), "Friday lunch only");
 r = await (await get(`venue=vecindario&date=${tue}&party=2`)).json();
-ok(r.enabled === false, "Vecindario disabled until hours exist");
+ok(r.enabled === true && r.slots.length === 7 + 5, "Vecindario open for online booking (provisional Las Palmas hours)");
+{ // Vecindario bookings go to its own calendar and do not use Las Palmas seats
+  const before = events.length;
+  const res = await post(handleBook, { venue: "vecindario", date: tue, time: "13:00", party: 2, name: "Luis Gil", phone: "600 222 333", email: "luis@example.com", consent: true });
+  ok(res.status === 200 && events.length === before + 1 && events.at(-1).cal === env.CALENDAR_ID_VECINDARIO, "Vecindario booking stored in the Vecindario calendar");
+  events.pop(); mails.length = 0;
+}
 ok((await get(`venue=las-palmas&date=${tue}&party=99`)).status === 400, "party too large rejected");
 ok((await get(`venue=nope&date=${tue}&party=2`)).status === 400, "unknown venue rejected");
 ok((await get(`venue=las-palmas&date=2020-01-01&party=2`)).status === 400, "past date rejected");
@@ -68,7 +74,7 @@ ok(res.status === 200 && b.ok, "booking created");
 ok(events.length === 1 && events[0].extendedProperties.private.party === "4", "event stored with party size");
 ok(events[0].start.dateTime === zonedToUtc(tue, "20:30").toISOString(), "event start correct");
 ok(mails.length === 2 && mails[0].to[0] === "ana@example.com" && mails[1].to[0] === "info@cuartango.com", "customer + staff e-mails sent");
-ok(/cancelar\?v=las-palmas&amp;id=ev1&amp;t=/.test(mails[0].html), "cancel link in e-mail");
+ok(mails[0].html.includes(`cancelar?v=las-palmas&amp;id=${b.id}&amp;t=`), "cancel link in e-mail");
 ok((await post(handleBook, { ...body, consent: false })).status === 400, "consent required");
 ok((await post(handleBook, { ...body, email: "bad" })).status === 400, "e-mail validated");
 ok((await post(handleBook, { ...body, website: "spam" })).status === 200 && events.length === 1, "honeypot silently ignored");
@@ -90,7 +96,7 @@ r = await (await get(`venue=las-palmas&date=${tue}&party=2`)).json();
 ok(r.slots.filter((s) => s.time < "17:00").every((s) => !s.available), "staff 'CERRADO' event blocks lunch");
 
 console.log("cancel");
-const id = "ev1", { signToken } = await import("../functions/lib/google.js");
+const id = b.id, { signToken } = await import("../functions/lib/google.js");
 const t = await signToken(env, `las-palmas:${id}`);
 ok((await post(handleCancel, { v: "las-palmas", id, t: "wrong" })).status === 403, "bad token rejected");
 let info = await (await post(handleCancel, { v: "las-palmas", id, t })).json();
