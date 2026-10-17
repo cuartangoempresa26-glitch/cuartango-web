@@ -60,7 +60,7 @@ const restaurant = (key, slugPath, extra = {}) => {
     '@type': 'Restaurant', '@id': SITE + slugPath + '#restaurant', name: BRAND + ' · ' + (lp ? 'Las Palmas' : 'Vecindario'),
     alternateName: lp ? ['Cuartango Entrepanes Las Palmas', 'Cuartango Las Palmas'] : ['Cuartango Entrepanes Vecindario', 'Cuartango Vecindario'],
     url: SITE + slugPath, parentOrganization: { '@id': SITE + '/#org' },
-    description: lp ? 'Parrilla argentina en Las Palmas de Gran Canaria: parrillada, entraña, vacío, empanadas, milanesas y entrepanes. Rooftop bar y terraza.'
+    description: lp ? 'Parrilla argentina en Las Palmas de Gran Canaria: parrillada, entraña, vacío, empanadas, milanesas y entrepanes. Con terraza exterior.'
       : 'Milanesas argentinas, entrepanes artesanos y sándwich de vacío al disco en Vecindario, Gran Canaria.',
     servesCuisine: lp ? ['Argentine', 'Barbecue', 'Steakhouse'] : ['Argentine', 'Sandwiches'],
     acceptsReservations: true, hasMenu: menuNode(key), priceRange: '€€', telephone: v.phone || undefined,
@@ -99,7 +99,7 @@ const faqLP = [
   ['¿Tienen parrilla argentina?', 'Sí. Cocinamos a la parrilla entraña, vacío, costilla, entrecot, mollejas, morcilla y chorizo argentino, y tenemos parrillada para compartir (también en versión premium con provolone, mollejas y morcilla).'],
   ['¿Qué más hay en la carta además de la carne?', 'Empanadas de carne cortada a cuchillo, de pollo y árabes; provolone; entrepanes artesanos (Milonga, Cuarteto, Tango, Folklore, Cumbia); milanesas napolitana, a caballo y fugazzeta; ensaladas; y postres como la chocotorta o la piña asada con helado.'],
   ['¿Se puede reservar mesa?', 'Sí, <a href="reservas.html?local=las-palmas">reserva online</a> en el local de Las Palmas: eliges día, hora y personas y te llega la confirmación por correo.'],
-  ['¿Tiene terraza o rooftop?', 'Sí, el local de Las Palmas tiene terraza exterior y rooftop bar.'],
+  ['¿Tiene terraza?', 'Sí, el local de Las Palmas tiene terraza exterior.'],
   ['¿Cómo se puede pagar?', 'Con ' + LP.payments + '.']
 ];
 const faqVC = [
@@ -107,6 +107,7 @@ const faqVC = [
   ['¿Tiene parrilla el local de Vecindario?', 'No. El local de Vecindario no tiene parrilla; está pensado para las milanesas, los entrepanes y el sándwich de vacío al disco. Si buscas parrilla argentina, está en el <a href="las-palmas.html">local de Las Palmas</a>.'],
   ['¿Qué milanesas tienen en Vecindario?', `Napolitana, fugazzeta, a caballo, criolla, caprese y La Porteña (con salsa picante y jalapeños), todas de ternera empanada y desde ${fmtEuro(minMilanesa)}.`],
   ['¿Qué es el sándwich de vacío al disco?', 'Vacío de ternera desmenuzado al disco de arado y ahumado durante 6 horas al fuego de leña, que se sirve como sándwich y se personaliza con toppings (jalapeño, cebolla morada, chimichurri, criolla, queso de cabra, provolone o cheddar).'],
+  ['¿Tiene terraza el local de Vecindario?', 'Sí, el local de Vecindario tiene terraza exterior cubierta.'],
   ['¿Se puede reservar mesa en Vecindario?', 'Sí, <a href="reservas.html?local=vecindario">reserva online</a> eligiendo día, hora y personas; recibes la confirmación por correo.']
 ];
 const faqCatering = [
@@ -119,10 +120,10 @@ const faqCatering = [
 
 const aboutLP = `<h2>Parrilla argentina en Las Palmas de Gran Canaria</h2>
 <p>${BRAND} Las Palmas es nuestro local con parrilla argentina, en ${LP.address}, en la zona de Santa Catalina. Aquí trabajamos el asado a la brasa: entraña, vacío, costilla, entrecot y mollejas, y una parrillada para compartir con chorizo argentino, morcilla y provolone fundido.</p>
-<p>Si prefieres algo distinto, tenemos empanadas de carne cortada a cuchillo, milanesas, entrepanes artesanos como la Milonga o el Cuarteto, ensaladas y postres como la chocotorta. El local tiene terraza y rooftop bar, y puedes <a href="reservas.html?local=las-palmas">reservar online</a>.</p>`;
+<p>Si prefieres algo distinto, tenemos empanadas de carne cortada a cuchillo, milanesas, entrepanes artesanos como la Milonga o el Cuarteto, ensaladas y postres como la chocotorta. El local tiene terraza exterior, y puedes <a href="reservas.html?local=las-palmas">reservar online</a>.</p>`;
 const aboutVC = `<h2>Milanesas y entrepanes argentinos en Vecindario</h2>
 <p>${BRAND} Vecindario es nuestro local de milanesas y entrepanes, en ${VC.address}. No tiene parrilla: cocinamos fina milanesa de ternera empanada (napolitana, fugazzeta, a caballo, criolla, caprese y La Porteña), entrepanes artesanos con pan rústico, empanadas y el sándwich de vacío al disco, ahumado durante 6 horas al fuego de leña.</p>
-<p>De postre, chocotorta, budín de pan con dulce de leche o alfajor artesanal. Puedes <a href="reservas.html?local=vecindario">reservar online</a> o ver la <a href="menu.html?local=vecindario">carta de Vecindario</a>. Si buscas parrilla argentina, la tienes en el <a href="las-palmas.html">local de Las Palmas</a>.</p>`;
+<p>El local tiene terraza exterior cubierta. De postre, chocotorta, budín de pan con dulce de leche o alfajor artesanal. Puedes <a href="reservas.html?local=vecindario">reservar online</a> o ver la <a href="menu.html?local=vecindario">carta de Vecindario</a>. Si buscas parrilla argentina, la tienes en el <a href="las-palmas.html">local de Las Palmas</a>.</p>`;
 
 // ---------- pages ----------
 const pages = {

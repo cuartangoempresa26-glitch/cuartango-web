@@ -6,14 +6,14 @@ window.HOME = {
       tag: "Local Las Palmas",
       title: "Donde el fuego es tradición",
       photo: "img/las-palmas-parrillada.jpg",
-      chips: ["Parrilla argentina", "Rooftop bar", "Terraza", "Catering"],
-      body: "Nuestro local de Las Palmas es el hogar de la parrilla argentina: entraña, vacío y costillar a la brasa, en su punto y con la paciencia de los parrilleros de verdad. Un espacio cuidado, con terraza y rooftop bar, para comer sin prisa. Ideal para una comida de domingo, una cena especial o un brindis en la azotea."
+      chips: ["Parrilla argentina", "Terraza exterior", "Catering"],
+      body: "Nuestro local de Las Palmas es el hogar de la parrilla argentina: entraña, vacío y costillar a la brasa, en su punto y con la paciencia de los parrilleros de verdad. Un espacio cuidado, con terraza exterior, para comer sin prisa. Ideal para una comida de domingo o una cena especial."
     },
     "vecindario": {
       tag: "Nuevo Local Vecindario",
       title: "Milanesas y entrepanes con alma argentina",
       photo: null, // photo to come
-      chips: ["Milanesas", "Entrepanes", "Sándwich de vacío al disco", "Sin parrilla"],
+      chips: ["Milanesas", "Entrepanes", "Sándwich de vacío al disco", "Terraza cubierta", "Sin parrilla"],
       body: "En nuestro nuevo local de Vecindario encontrarás el mismo ADN argentino en un formato más ágil: milanesas generosas, entrepanes artesanos y el sándwich de vacío al disco, con la calidad de siempre. Aquí no hay parrilla, pero sí el sabor de casa. Perfecto para una comida de calidad sin complicaciones, para compartir en familia o llevar."
     }
   },
