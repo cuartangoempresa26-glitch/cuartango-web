@@ -1,4 +1,4 @@
-// Live Google reviews. If /api/reviews is not configured yet (503) the demo cards from app.js stay in place.
+// Live Google reviews. The reviews sections stay hidden until /api/reviews answers (it returns 503 while not configured).
 (function () {
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const stars = (n) => `<span class="stars" aria-label="${n} de 5">${"★".repeat(n)}${"☆".repeat(5 - n)}</span>`;
@@ -12,13 +12,13 @@
     const home = document.getElementById("reviews"), venueBox = document.getElementById("v-reviews"), venue = document.body.dataset.venue;
     if (venueBox && venue) {
       const d = await get(venue); if (!d || !d.reviews.length) return;
-      caption(venueBox); venueBox.insertAdjacentHTML("beforebegin", head(d)); venueBox.innerHTML = d.reviews.map(card).join("");
+      caption(venueBox); venueBox.closest("section").hidden = false; venueBox.insertAdjacentHTML("beforebegin", head(d)); venueBox.innerHTML = d.reviews.map(card).join("");
     }
     if (home) {
       const [lp, vc] = await Promise.all([get("las-palmas"), get("vecindario")]);
       const parts = [[lp, "Las Palmas"], [vc, "Vecindario"]].filter(([d]) => d && d.reviews.length);
       if (!parts.length) return;
-      caption(home);
+      caption(home); home.closest("section").hidden = false;
       home.insertAdjacentHTML("beforebegin", parts.map(([d, l]) => head(d, l)).join(""));
       home.innerHTML = parts.flatMap(([d]) => d.reviews.slice(0, 2)).map(card).join("");
     }

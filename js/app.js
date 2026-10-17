@@ -66,7 +66,6 @@
   const sp = $("#specials");
   if (sp) sp.innerHTML = D.specials.map((s) => `<div class="specials"><h3>${esc(s.title)}</h3><p>${esc(s.text)}</p></div>`).join("");
   const rv = $("#reviews");
-  if (rv) rv.innerHTML = reviewsHTML();
 
   // ---------- venue pages ----------
   const vk = document.body.dataset.venue;
@@ -88,7 +87,6 @@
     $("#v-menu").href = "menu.html?local=" + vk;
     const o = v.order || {}, ob = $("#v-order");
     if (ob) ob.innerHTML = [[o.glovo, "Pedir en Glovo"], [o.uber, "Pedir en Uber Eats"]].filter(([u]) => u).map(([u, t]) => `<a class="btn ghost" href="${esc(u)}" target="_blank" rel="noopener">${t}</a>`).join(" ");
-    $("#v-reviews").innerHTML = reviewsHTML();
     $("#v-specials").innerHTML = D.specials.filter((s) => s.venue === "all" || s.venue === vk)
       .map((s) => `<div class="specials"><h3>${esc(s.title)}</h3><p>${esc(s.text)}</p></div>`).join("");
   }
