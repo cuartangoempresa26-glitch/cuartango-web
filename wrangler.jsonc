@@ -10,7 +10,9 @@
   "triggers": { "crons": ["0 * * * *"] },
   "vars": {
     "CONTACT_TO": "info@cuartango.com",
-    "MAIL_FROM": "Cuartango Web <web@cuartango.com>",
+    "STAFF_EMAIL_LAS_PALMAS": "reservas.laspalmas@cuartango.com",
+    "STAFF_EMAIL_VECINDARIO": "reservas.vecindario@cuartango.com",
+    "MAIL_FROM":"Cuartango Web <web@cuartango.com>",
     "GOOGLE_SERVICE_ACCOUNT_EMAIL": "reservas-web@cuartango-web.iam.gserviceaccount.com",
     "CALENDAR_ID_LAS_PALMAS": "5d26b4a318cd7b22873b123992a7a0c5e60594dc0bd0be7b8c7f42c63cb2ad44@group.calendar.google.com",
     "CALENDAR_ID_VECINDARIO": "1d4ae3b8772c8f4456277c9d038a76f2db56f36ab04d89df1da34d53a1523086@group.calendar.google.com"
