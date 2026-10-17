@@ -12,8 +12,7 @@
   ];
   const nav = links.map(([h, t, k]) => `<a href="${h}"${k === page ? ' aria-current="page"' : ""}>${t}</a>`).join("");
   document.body.insertAdjacentHTML("afterbegin",
-    `<div class="demo-banner">Versión de prueba · contenido de ejemplo marcado como “por confirmar”</div>
-     <header class="site"><div class="wrap">
+    `<header class="site"><div class="wrap">
        <a class="brand" href="index.html">CUARTANGO</a>
        <button class="burger" aria-label="Abrir menú" aria-expanded="false">Menú</button>
        <nav class="main">${nav}</nav>
