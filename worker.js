@@ -14,6 +14,9 @@ export default {
       url.hostname = url.hostname.slice(4);
       return Response.redirect(url.toString(), 301);
     }
+    // QR codes printed in the venues point here, so the destination can change without reprinting.
+    const qr = { "/qr/las-palmas": "/menu?local=las-palmas", "/qr/vecindario": "/menu?local=vecindario", "/qr": "/menu" }[url.pathname.replace(/\/$/, "")];
+    if (qr) return Response.redirect(url.origin + qr + (qr.includes("?") ? "&" : "?") + "utm_source=qr", 302);
     const m = request.method;
     switch (url.pathname) {
       case "/api/catering": return m === "POST" ? catering({ request, env }) : notAllowed("POST");
