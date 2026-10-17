@@ -19,7 +19,8 @@ window.CUARTANGO = {
       hours: { 0: [["13:00","17:00"]], 1: [], 2: [["13:00","17:00"],["20:00","23:00"]], 3: [["13:00","17:00"],["20:00","23:00"]],
                4: [["13:00","16:30"],["20:00","23:00"]], 5: [["13:00","16:30"]], 6: [["13:00","17:00"],["20:00","23:00"]] },
       services: ["Parrilla a la brasa", "En el local", "Para llevar", "Delivery", "Catering", "Buffet", "Eventos privados", "Bodas", "Terraza exterior", "Rooftop bar", "Zona de fumadores", "Wi-Fi gratis"],
-      payments: "Visa, Mastercard, Amex, débito, efectivo, contactless, Apple Pay"
+      payments: "Visa, Mastercard, Amex, débito, efectivo, contactless, Apple Pay",
+      order: { glovo: null, uber: null } // paste the venue links here; buttons appear automatically
     },
     "vecindario": {
       name: "Nuevo Local Vecindario",
@@ -30,7 +31,8 @@ window.CUARTANGO = {
       mapEmbed: "https://www.google.com/maps?q=Calle+Granada+22+Balos+Vecindario&output=embed",
       hours: null,
       services: [], // TODO (este local no tiene parrilla)
-      payments: null
+      payments: null,
+      order: { glovo: null, uber: null }
     }
   },
   // Sources: "carta original - las palmas.pdf" and "carta cuartango milaneseria 2.pdf". Allergen data not provided: left out on purpose.

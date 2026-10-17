@@ -25,7 +25,7 @@
             <p>${esc(h.body)}</p>
             <ul class="vp-chips">${h.chips.map((c) => `<li>${esc(c)}</li>`).join("")}</ul>
             <p class="vp-addr">${esc(v.address)}</p>
-            <div class="vp-actions"><a class="btn" href="${k}.html">Ver local</a><a class="btn ghost" href="reservas.html?local=${k}">Reservar</a><a class="btn ghost" href="menu.html?local=${k}">Carta</a></div>
+            <div class="vp-actions"><a class="btn" href="${k}.html">Ver local</a><a class="btn ghost" href="reservas.html?local=${k}">Reservar</a><a class="btn ghost" href="menu.html?local=${k}">Carta</a>${v.order && v.order.glovo ? `<a class="btn ghost" href="${esc(v.order.glovo)}" target="_blank" rel="noopener">Glovo</a>` : ""}${v.order && v.order.uber ? `<a class="btn ghost" href="${esc(v.order.uber)}" target="_blank" rel="noopener">Uber Eats</a>` : ""}</div>
           </div>
         </div></article>`;
     }).join("");

@@ -86,6 +86,8 @@
     if (ml2) ml2.addEventListener("click", () => { $(".map-facade").outerHTML = `<iframe class="map" title="Mapa ${esc(v.name)}" src="${v.mapEmbed}" sandbox="allow-scripts allow-same-origin allow-popups allow-forms" referrerpolicy="no-referrer-when-downgrade"></iframe><p><a class="btn ghost" href="${v.maps}" target="_blank" rel="noopener">Cómo llegar</a></p>`; });
     $("#v-book").href = "reservas.html?local=" + vk;
     $("#v-menu").href = "menu.html?local=" + vk;
+    const o = v.order || {}, ob = $("#v-order");
+    if (ob) ob.innerHTML = [[o.glovo, "Pedir en Glovo"], [o.uber, "Pedir en Uber Eats"]].filter(([u]) => u).map(([u, t]) => `<a class="btn ghost" href="${esc(u)}" target="_blank" rel="noopener">${t}</a>`).join(" ");
     $("#v-reviews").innerHTML = reviewsHTML();
     $("#v-specials").innerHTML = D.specials.filter((s) => s.venue === "all" || s.venue === vk)
       .map((s) => `<div class="specials"><h3>${esc(s.title)}</h3><p>${esc(s.text)}</p></div>`).join("");
