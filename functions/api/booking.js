@@ -10,7 +10,8 @@ import { sendMail, confirmationMail, reminderMail, staffMail } from "../lib/mail
 
 const json = (o, status = 200) => new Response(JSON.stringify(o), { status, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" } });
 const SITE = (env) => env.SITE_URL || "https://cuartango.com";
-const staffTo = (env) => env.CONTACT_TO || "info@cuartango.com";
+// Each venue manager gets their own inbox: STAFF_EMAIL_LAS_PALMAS / STAFF_EMAIL_VECINDARIO (fallback: CONTACT_TO).
+const staffTo = (env, venue) => env[VENUES[venue]?.staffVar] || env.CONTACT_TO || "info@cuartango.com";
 
 export const isConfigured = (env, key) => !!(VENUES[key] && env.GOOGLE_SERVICE_ACCOUNT_EMAIL && env.GOOGLE_PRIVATE_KEY && env[VENUES[key].calendarVar]);
 
@@ -120,9 +121,9 @@ export async function handleBook(request, env) {
     let emailed = false;
     try {
       const c = confirmationMail({ name, venueName: v.name, address: v.address, when, party, cancelUrl });
-      emailed = await sendMail(env, { to: email, ...c });
+      emailed = await sendMail(env, { to: email, replyTo: staffTo(env, venue), ...c });
       const s = staffMail({ kind: "new", name, phone, email, venueName: v.name, when, party, notes });
-      await sendMail(env, { to: staffTo(env), replyTo: email, ...s });
+      await sendMail(env, { to: staffTo(env, venue), replyTo: email, ...s });
     } catch { /* e-mail problems never undo a confirmed booking */ }
     return json({ ok: true, id: ev.id, when, venue: v.name, party, emailed });
   } catch (e) { return json({ error: "calendar_unavailable" }, 502); }
@@ -144,7 +145,7 @@ export async function handleCancel(request, env) {
     const when = prettyWhen(startLocal, time), info = { venue: VENUES[venue].name, when, party: Number(p.party), name: p.name };
     if (!d.confirm) return json({ ok: true, ...info });
     await deleteEvent(env, calId, id);
-    try { await sendMail(env, { to: staffTo(env), ...staffMail({ kind: "cancel", name: p.name, phone: p.phone, email: p.email, venueName: VENUES[venue].name, when, party: p.party }) }); } catch {}
+    try { await sendMail(env, { to: staffTo(env, venue), ...staffMail({ kind: "cancel", name: p.name, phone: p.phone, email: p.email, venueName: VENUES[venue].name, when, party: p.party }) }); } catch {}
     return json({ ok: true, cancelled: true, ...info });
   } catch (e) { return json({ error: "calendar_unavailable" }, 502); }
 }

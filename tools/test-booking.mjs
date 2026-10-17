@@ -32,7 +32,7 @@ globalThis.fetch = async (url, init = {}) => {
 };
 
 const env = { GOOGLE_SERVICE_ACCOUNT_EMAIL: "bot@x.iam.gserviceaccount.com", GOOGLE_PRIVATE_KEY: pem, CALENDAR_ID_LAS_PALMAS: "lp@group.calendar.google.com",
-  CALENDAR_ID_VECINDARIO: "vc@group.calendar.google.com", RESEND_API_KEY: "re_test", CONTACT_TO: "info@cuartango.com", SITE_URL: "https://cuartango.com" };
+  CALENDAR_ID_VECINDARIO: "vc@group.calendar.google.com", RESEND_API_KEY: "re_test", CONTACT_TO: "info@cuartango.com", STAFF_EMAIL_LAS_PALMAS: "laspalmas@x.com", STAFF_EMAIL_VECINDARIO: "vecindario@x.com", SITE_URL: "https://cuartango.com" };
 const get = (qs, e = env) => handleAvailability(new Request("https://x/api/availability?" + qs), e);
 const post = (fn, body, e = env) => fn(new Request("https://x/api", { method: "POST", body: JSON.stringify(body) }), e);
 
@@ -60,6 +60,7 @@ ok(r.enabled === true && r.slots.length === 7 + 5, "Vecindario open for online b
   const before = events.length;
   const res = await post(handleBook, { venue: "vecindario", date: tue, time: "13:00", party: 2, name: "Luis Gil", phone: "600 222 333", email: "luis@example.com", consent: true });
   ok(res.status === 200 && events.length === before + 1 && events.at(-1).cal === env.CALENDAR_ID_VECINDARIO, "Vecindario booking stored in the Vecindario calendar");
+  ok(mails.at(-1).to[0] === "vecindario@x.com", "Vecindario booking e-mails the Vecindario manager");
   events.pop(); mails.length = 0;
 }
 ok((await get(`venue=las-palmas&date=${tue}&party=99`)).status === 400, "party too large rejected");
@@ -73,7 +74,7 @@ let res = await post(handleBook, body); let b = await res.json();
 ok(res.status === 200 && b.ok, "booking created");
 ok(events.length === 1 && events[0].extendedProperties.private.party === "4", "event stored with party size");
 ok(events[0].start.dateTime === zonedToUtc(tue, "20:30").toISOString(), "event start correct");
-ok(mails.length === 2 && mails[0].to[0] === "ana@example.com" && mails[1].to[0] === "info@cuartango.com", "customer + staff e-mails sent");
+ok(mails.length === 2 && mails[0].to[0] === "ana@example.com" && mails[1].to[0] === "laspalmas@x.com", "customer + Las Palmas manager e-mails sent");
 ok(mails[0].html.includes(`cancelar?v=las-palmas&amp;id=${b.id}&amp;t=`), "cancel link in e-mail");
 ok((await post(handleBook, { ...body, consent: false })).status === 400, "consent required");
 ok((await post(handleBook, { ...body, email: "bad" })).status === 400, "e-mail validated");
