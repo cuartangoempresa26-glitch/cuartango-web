@@ -28,13 +28,14 @@
   const lp = D.venues["las-palmas"];
   document.body.insertAdjacentHTML("beforeend",
     `<footer class="site"><div class="wrap grid three">
-       <div><h3>Cuartango Entrepanes</h3><p class="muted">${esc(D.slogan)}</p>
+       <div><h3>Cuartango Argentina</h3><p class="muted">${esc(D.slogan)}</p>
          <p><a href="${D.instagram}" target="_blank" rel="noopener">Instagram @cuartango_argentina</a></p></div>
-       <div><h3>Las Palmas</h3><p>${esc(lp.address)}<br><a href="tel:${lp.phone.replace(/\s/g, "")}">${lp.phone}</a></p></div>
-       <div><h3>Vecindario</h3><p>${esc(D.venues.vecindario.address)}<br><span class="muted">Horario próximamente</span></p>
+       <div><h3>Las Palmas</h3><p>${esc(lp.address)}<br><a href="tel:${lp.phone.replace(/\s/g, "")}">${lp.phone}</a></p>
+         <p><a href="las-palmas.html">Parrilla argentina en Las Palmas</a></p></div>
+       <div><h3>Vecindario</h3><p>${esc(D.venues.vecindario.address)}<br><a href="vecindario.html">Milanesas y entrepanes en Vecindario</a></p>
          <p><a href="mailto:${D.email}">${D.email}</a></p></div>
      </div>
-     <div class="wrap muted" style="margin-top:24px;font-size:.85rem">© ${new Date().getFullYear()} Cuartango · <a href="aviso-legal.html">Aviso legal</a> · <a href="privacidad.html">Privacidad</a> · <a href="cookies.html">Cookies</a></div></footer>
+     <div class="wrap muted" style="margin-top:24px;font-size:.85rem">© ${new Date().getFullYear()} Cuartango Argentina · <a href="aviso-legal.html">Aviso legal</a> · <a href="privacidad.html">Privacidad</a> · <a href="cookies.html">Cookies</a></div></footer>
      <div class="mobilebar"><a href="tel:${lp.phone.replace(/\s/g, "")}">Llamar</a><a href="${lp.maps}" target="_blank" rel="noopener">Cómo llegar</a></div>`);
 
   // ---------- helpers ----------
