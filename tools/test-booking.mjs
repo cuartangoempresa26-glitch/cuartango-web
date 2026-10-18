@@ -90,8 +90,8 @@ ok((await post(handleBook, { ...body, email: "bad" })).status === 400, "e-mail v
 ok((await post(handleBook, { ...body, website: "spam" })).status === 200 && events.length === 1, "honeypot silently ignored");
 
 console.log("capacity");
-// seats 40: fill 20:30 with 10 + 10 + 10 + 6 -> 36 used, a party of 5 must not fit
-for (const p of [10, 10, 10, 6]) await post(handleBook, { ...body, party: p, name: "Grupo " + p, email: `g${p}@example.com` });
+// seats 64 (4 already used by the first booking): fill 20:30 with 6 x 10 -> exactly 64 used, a party of 5 must not fit
+for (const p of [10, 10, 10, 10, 10, 10]) await post(handleBook, { ...body, party: p, name: "Grupo " + p, email: `g${p}@example.com` });
 r = await (await get(`venue=las-palmas&date=${tue}&party=5`)).json();
 const s2030 = r.slots.find((s) => s.time === "20:30");
 ok(s2030 && !s2030.available, "20:30 full for 5 people");

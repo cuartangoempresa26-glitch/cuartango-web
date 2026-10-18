@@ -15,7 +15,7 @@ export const VENUES = {
     phone: "+34 656 441 966",
     calendarVar: "CALENDAR_ID_LAS_PALMAS",
     staffVar: "STAFF_EMAIL_LAS_PALMAS",
-    seats: 40, // assumption: online seat capacity. Confirm with the client.
+    seats: 64, // total capacity given by the client (2026-10-19). Bookings from TheFork/Dish are not synced: lower this if they take seats too.
     hours: { 0: [["13:00", "17:00"]], 1: [], 2: [["13:00", "17:00"], ["20:00", "23:00"]], 3: [["13:00", "17:00"], ["20:00", "23:00"]],
              4: [["13:00", "16:30"], ["20:00", "23:00"]], 5: [["13:00", "16:30"], ["20:00", "23:00"]], 6: [["13:00", "17:00"], ["20:00", "23:00"]] }
   },
