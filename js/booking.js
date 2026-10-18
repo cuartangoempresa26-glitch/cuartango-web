@@ -9,7 +9,7 @@
 
   const venueSel = $("#b-venue"), dateIn = $("#b-date"), partyIn = $("#b-party"), slotsEl = $("#b-slots"), submit = $("#b-submit"), msg = $("#b-msg"), result = $("#b-result");
   const params = new URLSearchParams(location.search);
-  if (D.venues[params.get("local")]) venueSel.value = params.get("local");
+  if (D.venues[params.get("local")] && !D.venues[params.get("local")].comingSoon) venueSel.value = params.get("local");
   const pad = (n) => String(n).padStart(2, "0");
   const iso = (d) => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
   const today = new Date(), max = new Date(); max.setDate(max.getDate() + 60);

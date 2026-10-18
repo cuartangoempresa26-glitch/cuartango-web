@@ -18,14 +18,14 @@
         ${h.video && playVideo ? `<video class="vp-video" muted loop playsinline autoplay preload="metadata" poster="${h.photo}" aria-hidden="true"><source src="${h.video}" type="video/mp4"></video>` : ""}
         <div class="vp-shade"></div>
         <div class="vp-in">
-          <span class="vp-tag">${esc(h.tag)}</span>
+          <span class="vp-tag">${esc(h.tag)}${v.comingSoon ? " · Próximamente" : ""}</span>
           <h3>${esc(h.title)}</h3>
           <div class="vp-open">${open}<span class="vp-hint" aria-hidden="true">Descubrir <i>→</i></span></div>
           <div class="vp-more">
             <p>${esc(h.body)}</p>
             <ul class="vp-chips">${h.chips.map((c) => `<li>${esc(c)}</li>`).join("")}</ul>
             <p class="vp-addr">${esc(v.address)}</p>
-            <div class="vp-actions"><a class="btn" href="${k}.html">Ver local</a><a class="btn ghost" href="reservas.html?local=${k}">Reservar</a><a class="btn ghost" href="menu.html?local=${k}">Carta</a>${v.order && v.order.glovo ? `<a class="btn ghost" href="${esc(v.order.glovo)}" target="_blank" rel="noopener">Glovo</a>` : ""}${v.order && v.order.uber ? `<a class="btn ghost" href="${esc(v.order.uber)}" target="_blank" rel="noopener">Uber Eats</a>` : ""}</div>
+            <div class="vp-actions"><a class="btn" href="${k}.html">Ver local</a>${v.comingSoon ? "" : `<a class="btn ghost" href="reservas.html?local=${k}">Reservar</a>`}<a class="btn ghost" href="menu.html?local=${k}">Carta</a>${!v.comingSoon && v.order && v.order.glovo ? `<a class="btn ghost" href="${esc(v.order.glovo)}" target="_blank" rel="noopener">Glovo</a>` : ""}${!v.comingSoon && v.order && v.order.uber ? `<a class="btn ghost" href="${esc(v.order.uber)}" target="_blank" rel="noopener">Uber Eats</a>` : ""}</div>
           </div>
         </div></article>`;
     }).join("");

@@ -3,6 +3,7 @@
 import { generateKeyPairSync } from "node:crypto";
 import { handleAvailability, handleBook, handleCancel, sendReminders, computeSlots } from "../functions/api/booking.js";
 import { zonedToUtc } from "../functions/lib/time.js";
+import { VENUES } from "../functions/lib/venues.js";
 
 let pass = 0, fail = 0;
 const ok = (c, m) => { if (c) pass++; else { fail++; console.log("  FAIL:", m); } };
@@ -54,14 +55,22 @@ r = await (await get(`venue=las-palmas&date=${mon}&party=2`)).json();
 ok(r.closed === true && r.slots.length === 0, "Monday closed");
 r = await (await get(`venue=las-palmas&date=${fri}&party=2`)).json();
 ok(r.slots.some((s) => s.time === "13:00") && r.slots.some((s) => s.time === "22:00") && !r.slots.some((s) => s.time === "16:30" || s.time === "17:00"), "Friday: lunch (until 16:30) and dinner (20:00-23:00)");
-r = await (await get(`venue=vecindario&date=${tue}&party=2`)).json();
-ok(r.enabled === true && r.slots.length === 7 + 5, "Vecindario open for online booking (provisional Las Palmas hours)");
-{ // Vecindario bookings go to its own calendar and do not use Las Palmas seats
+{ // Vecindario has not opened yet: no online bookings while venues.vecindario.comingSoon is true
+  r = await (await get(`venue=vecindario&date=${tue}&party=2`)).json();
+  ok(r.enabled === false && r.reason === "proximamente", "Vecindario shows as coming soon (no slots)");
+  const before0 = events.length;
+  ok((await post(handleBook, { venue: "vecindario", date: tue, time: "13:00", party: 2, name: "Luis Gil", phone: "600 222 333", email: "luis@example.com", consent: true })).status === 409 && events.length === before0, "Vecindario booking refused while coming soon");
+}
+{ // once it opens (flag removed), bookings go to its own calendar and notify its own manager
+  VENUES.vecindario.comingSoon = false;
+  r = await (await get(`venue=vecindario&date=${tue}&party=2`)).json();
+  ok(r.enabled === true && r.slots.length === 7 + 5, "Vecindario bookable once open");
   const before = events.length;
   const res = await post(handleBook, { venue: "vecindario", date: tue, time: "13:00", party: 2, name: "Luis Gil", phone: "600 222 333", email: "luis@example.com", consent: true });
   ok(res.status === 200 && events.length === before + 1 && events.at(-1).cal === env.CALENDAR_ID_VECINDARIO, "Vecindario booking stored in the Vecindario calendar");
   ok(mails.at(-1).to[0] === "vecindario@x.com", "Vecindario booking e-mails the Vecindario manager");
   events.pop(); mails.length = 0;
+  VENUES.vecindario.comingSoon = true;
 }
 ok((await get(`venue=las-palmas&date=${tue}&party=99`)).status === 400, "party too large rejected");
 ok((await get(`venue=nope&date=${tue}&party=2`)).status === 400, "unknown venue rejected");
@@ -121,8 +130,8 @@ console.log("hours stay in sync with the website data");
   const vm = await import("node:vm"), fsm = await import("node:fs");
   const ctx = { window: {} }; vm.createContext(ctx);
   vm.runInContext(fsm.readFileSync(new URL("../js/data.js", import.meta.url), "utf8"), ctx);
-  const { VENUES } = await import("../functions/lib/venues.js");
-  for (const k of Object.keys(VENUES)) ok(JSON.stringify(ctx.window.CUARTANGO.venues[k].hours) === JSON.stringify(VENUES[k].hours), `hours of ${k} equal in js/data.js and functions/lib/venues.js`);
+  for (const k of Object.keys(VENUES)) { ok(JSON.stringify(ctx.window.CUARTANGO.venues[k].hours) === JSON.stringify(VENUES[k].hours), `hours of ${k} equal in js/data.js and functions/lib/venues.js`);
+    ok(!!ctx.window.CUARTANGO.venues[k].comingSoon === !!VENUES[k].comingSoon, `comingSoon flag of ${k} equal in js/data.js and functions/lib/venues.js`); }
 }
 
 console.log(`\n${pass} passed, ${fail} failed`);

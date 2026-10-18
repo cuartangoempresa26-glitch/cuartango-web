@@ -17,7 +17,7 @@
 
   const drawVenue = () => {
     $("#menu-venue").innerHTML = Object.entries(D.venues).map(([k, v]) =>
-      `<button type="button" data-v="${k}" class="${k === venue ? "on" : ""}" aria-pressed="${k === venue}">${esc(v.name)}</button>`).join("");
+      `<button type="button" data-v="${k}" class="${k === venue ? "on" : ""}" aria-pressed="${k === venue}">${esc(v.name)}${v.comingSoon ? " · Próximamente" : ""}</button>`).join("");
     const m = D.menus[venue];
     $("#menu-note").innerHTML = (venue === "las-palmas"
       ? "Carta del Local Las Palmas, con parrilla."

@@ -21,6 +21,7 @@ export const VENUES = {
   },
   "vecindario": {
     name: "Nuevo Local Vecindario",
+    comingSoon: true,  // not open yet: no online bookings. Remove (here and in js/data.js) on opening day.
     address: "C. Granada 22, Balos, Vecindario",
     phone: null,
     calendarVar: "CALENDAR_ID_VECINDARIO",

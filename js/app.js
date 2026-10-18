@@ -46,9 +46,10 @@
   const mins = (t) => { const [h, m] = t.split(":").map(Number); return h * 60 + m; };
   const nowIn = () => { const p = Object.fromEntries(new Intl.DateTimeFormat("en-GB", { timeZone: D.timezone, weekday: "short", hour: "2-digit", minute: "2-digit", hourCycle: "h23" })
     .formatToParts(new Date()).map((x) => [x.type, x.value])); return { day: ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].indexOf(p.weekday), min: Number(p.hour) * 60 + Number(p.minute) }; };
-  const openStatus = (v) => { if (!v.hours) return null; const n = nowIn(); const cur = (v.hours[n.day] || []).find(([a, b]) => n.min >= mins(a) && n.min < mins(b));
+  const SOON = '<span class="badge todo">Próximamente</span>';
+  const openStatus = (v) => { if (v.comingSoon) return SOON; if (!v.hours) return null; const n = nowIn(); const cur = (v.hours[n.day] || []).find(([a, b]) => n.min >= mins(a) && n.min < mins(b));
     return cur ? `<span class="badge open">Abierto ahora · cierra a las ${cur[1]}</span>` : `<span class="badge closed">Cerrado ahora</span>`; };
-  const hoursHTML = (v) => { if (!v.hours) return `<span class="badge todo">Horario por confirmar</span>`;
+  const hoursHTML = (v) => { if (v.comingSoon) return SOON + '<span class="muted"> Anunciaremos el horario con la apertura.</span>'; if (!v.hours) return `<span class="badge todo">Horario por confirmar</span>`;
     const today = nowIn().day;
     return openStatus(v) + `<table class="hours">` + ORDER.map((i) => `<tr${i === today ? ' class="today"' : ""}><th>${DAYS[i]}</th><td>${v.hours[i].length ? v.hours[i].map(([a, b]) => a + "–" + b).join(" · ") : "Cerrado"}</td></tr>`).join("") + `</table>`; };
   window.CT = { openStatus, nowIn };
@@ -72,7 +73,7 @@
   if (vk) {
     const v = D.venues[vk];
     $("#v-address").innerHTML = v.address ? esc(v.address) : '<span class="badge todo">Dirección por confirmar</span>';
-    $("#v-phone").innerHTML = v.phone ? `<a href="tel:${v.phone.replace(/\s/g, "")}">${v.phone}</a>` : '<span class="badge todo">Teléfono por confirmar</span>';
+    $("#v-phone").innerHTML = v.phone ? `<a href="tel:${v.phone.replace(/\s/g, "")}">${v.phone}</a>` : (v.comingSoon ? 'Lo anunciaremos con la apertura' : '<span class="badge todo">Teléfono por confirmar</span>');
     $("#v-hours").innerHTML = hoursHTML(v);
     $("#v-services").innerHTML = v.services.length ? v.services.map((s) => `<li>${esc(s)}</li>`).join("") : '<li class="badge todo">Servicios por confirmar</li>';
     $("#v-pay").textContent = v.payments || "Por confirmar";
@@ -83,12 +84,13 @@
       : '<div class="card muted">El mapa aparecerá cuando tengamos la dirección.</div>';
     const ml2 = $("#map-load");
     if (ml2) ml2.addEventListener("click", () => { $(".map-facade").outerHTML = `<iframe class="map" title="Mapa ${esc(v.name)}" src="${v.mapEmbed}" sandbox="allow-scripts allow-same-origin allow-popups allow-forms" referrerpolicy="no-referrer-when-downgrade"></iframe><p><a class="btn ghost" href="${v.maps}" target="_blank" rel="noopener">Cómo llegar</a></p>`; });
-    $("#v-book").href = "reservas.html?local=" + vk;
+    if (v.comingSoon) { $("#v-book").outerHTML = SOON; const ev = $("#v-event"); if (ev) ev.remove(); } else $("#v-book").href = "reservas.html?local=" + vk;
     $("#v-menu").href = "menu.html?local=" + vk;
-    const o = v.order || {}, ob = $("#v-order");
+    const o = v.comingSoon ? {} : (v.order || {}), ob = $("#v-order");
     if (ob) ob.innerHTML = [[o.glovo, "Pedir en Glovo"], [o.uber, "Pedir en Uber Eats"]].filter(([u]) => u).map(([u, t]) => `<a class="btn ghost" href="${esc(u)}" target="_blank" rel="noopener">${t}</a>`).join(" ");
     $("#v-specials").innerHTML = D.specials.filter((s) => s.venue === "all" || s.venue === vk)
       .map((s) => `<div class="specials"><h3>${esc(s.title)}</h3><p>${esc(s.text)}</p></div>`).join("");
+    if (!$("#v-specials").children.length) $("#v-specials").closest("section").hidden = true;
   }
 
 })();

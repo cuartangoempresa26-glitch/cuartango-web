@@ -24,6 +24,7 @@ window.CUARTANGO = {
     },
     "vecindario": {
       name: "Nuevo Local Vecindario",
+      comingSoon: true, // todavía no ha abierto: muestra "Próximamente" y no admite reservas. Quitar esta línea (aquí y en functions/lib/venues.js) al abrir.
       city: "Vecindario (Santa Lucía de Tirajana)",
       address: "C. Granada 22, Balos, Vecindario", // postal code and exact municipality to confirm
       phone: null,   // TODO
@@ -434,7 +435,7 @@ window.CUARTANGO = {
     }
   },
   specials: [
-    { venue: "all", title: "Especial del día (ejemplo)", text: "Aquí aparecerán las promociones y especiales de cada local." }
+    // { venue: "las-palmas" | "vecindario" | "all", title: "Menú del día", text: "..." }  <- add real promotions here; the section stays hidden while this list is empty
   ],
   reviews: [ // DEMO ONLY: will be replaced by live Google reviews
     { author: "Cliente (demo)", stars: 5, text: "Producto excelente." },

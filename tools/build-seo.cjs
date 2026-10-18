@@ -61,10 +61,10 @@ const restaurant = (key, slugPath, extra = {}) => {
     alternateName: lp ? ['Cuartango Entrepanes Las Palmas', 'Cuartango Las Palmas'] : ['Cuartango Entrepanes Vecindario', 'Cuartango Vecindario'],
     url: SITE + slugPath, parentOrganization: { '@id': SITE + '/#org' },
     description: lp ? 'Parrilla argentina en Las Palmas de Gran Canaria: parrillada, entraña, vacío, empanadas, milanesas y entrepanes. Con terraza exterior.'
-      : 'Milanesas argentinas, entrepanes artesanos y sándwich de vacío al disco en Vecindario, Gran Canaria.',
+      : 'Próxima apertura. Milanesas argentinas, entrepanes artesanos y sándwich de vacío al disco en Vecindario, Gran Canaria.',
     servesCuisine: lp ? ['Argentine', 'Barbecue', 'Steakhouse'] : ['Argentine', 'Sandwiches'],
-    acceptsReservations: true, hasMenu: menuNode(key), priceRange: '€€', telephone: v.phone || undefined,
-    paymentAccepted: v.payments || undefined, openingHoursSpecification: hoursSpec(v.hours), sameAs: [D.instagram, v.maps].filter(Boolean),
+    acceptsReservations: !v.comingSoon, hasMenu: menuNode(key), priceRange: '€€', telephone: v.phone || undefined,
+    paymentAccepted: v.payments || undefined, openingHoursSpecification: v.comingSoon ? undefined : hoursSpec(v.hours), sameAs: [D.instagram, v.maps].filter(Boolean),
     areaServed: lp ? 'Las Palmas de Gran Canaria' : 'Vecindario, Gran Canaria',
     address: { '@type': 'PostalAddress', streetAddress: street.trim(), addressLocality: lp ? 'Las Palmas de Gran Canaria' : 'Vecindario',
       postalCode: lp ? '35007' : undefined, addressRegion: 'Las Palmas', addressCountry: 'ES' },
@@ -88,14 +88,14 @@ const fmtEuro = (n) => n.toFixed(2).replace('.', ',') + ' €';
 const cheapest = C.menus[0].price;
 
 const faqHome = [
-  ['¿Qué es Cuartango Argentina?', 'Cuartango Argentina es un restaurante argentino con dos locales en Gran Canaria: <a href="las-palmas.html">parrilla argentina en Las Palmas de Gran Canaria</a> y <a href="vecindario.html">milanesas, entrepanes y sándwich de vacío al disco en Vecindario</a>. También hacemos <a href="catering.html">catering argentino con parrillero</a> para bodas, cumpleaños y eventos.'],
-  ['¿Dónde están los locales de Cuartango Argentina?', `En Las Palmas de Gran Canaria, en ${LP.address}. En Vecindario, en ${VC.address}.`],
+  ['¿Qué es Cuartango Argentina?', 'Cuartango Argentina es un restaurante argentino en Gran Canaria. Tiene un local abierto en Las Palmas y un nuevo local de próxima apertura en Vecindario: <a href="las-palmas.html">parrilla argentina en Las Palmas de Gran Canaria</a> y <a href="vecindario.html">milanesas, entrepanes y sándwich de vacío al disco en Vecindario</a>. También hacemos <a href="catering.html">catering argentino con parrillero</a> para bodas, cumpleaños y eventos.'],
+  ['¿Dónde están los locales de Cuartango Argentina?', `En Las Palmas de Gran Canaria, en ${LP.address}. El nuevo local de Vecindario abrirá próximamente, en ${VC.address}.`],
   ['¿Qué se puede comer en Cuartango Argentina?', 'En Las Palmas: parrillada, entraña, vacío, costilla, entrecot, mollejas y morcilla a la parrilla, empanadas, provolone, milanesas, entrepanes y ensaladas. En Vecindario: milanesas (napolitana, fugazzeta, a caballo, criolla, caprese y La Porteña), entrepanes (Milonga, Cuarteto, Tango, Folklore y Cumbia), sándwich de vacío al disco, empanadas y provolones. De postre: chocotorta, budín de pan con dulce de leche y alfajor artesanal.'],
   ['¿Hay parrilla argentina en los dos locales?', 'La parrilla está en el local de Las Palmas. El local de Vecindario no tiene parrilla: allí la especialidad son las milanesas, los entrepanes y el sándwich de vacío al disco.'],
   ['¿Se puede reservar mesa?', 'Sí. Puedes <a href="reservas.html">reservar online</a> eligiendo local, día, hora y número de personas, y recibes la confirmación por correo. Hasta 10 personas por internet; para grupos mayores, escríbenos a ' + D.email + '.'],
   ['¿Hacéis catering argentino a domicilio en Gran Canaria?', `Sí. Llevamos la parrilla a tu celebración, con parrillero profesional, montaje en el lugar y camareros. Menús desde ${cheapest} € por persona, para un mínimo de 25 comensales. <a href="catering.html">Pide tu presupuesto</a>.`],
-  ['¿Se puede pedir para llevar o a domicilio?', 'Sí. Hacemos delivery desde los dos locales, el de Las Palmas y el de Vecindario, y en Las Palmas también para llevar.'],
-  ['¿Se puede celebrar un cumpleaños o un evento en Cuartango Argentina?', 'Sí. Puedes <a href="eventos.html">festejar tu cumpleaños, una reunión o una cena de empresa en nuestros locales</a> de Las Palmas y Vecindario: cuéntanos el local, la fecha y cuántos sois y te respondemos con una propuesta a medida.']
+  ['¿Se puede pedir para llevar o a domicilio?', 'Sí. Hacemos delivery y también para llevar desde el local de Las Palmas. El nuevo local de Vecindario también tendrá delivery cuando abra.'],
+  ['¿Se puede celebrar un cumpleaños o un evento en Cuartango Argentina?', 'Sí. Puedes <a href="eventos.html">festejar tu cumpleaños, una reunión o una cena de empresa en nuestro local de Las Palmas</a> (y pronto en Vecindario): cuéntanos el local, la fecha y cuántos sois y te respondemos con una propuesta a medida.']
 ];
 
 const faqLP = [
@@ -108,18 +108,19 @@ const faqLP = [
   ['¿Cómo se puede pagar?', 'Con ' + LP.payments + '.']
 ];
 const faqVC = [
-  ['¿Dónde está Cuartango Argentina en Vecindario?', `En ${VC.address}.`],
+  ['¿Dónde está Cuartango Argentina en Vecindario?', `En ${VC.address}. Es un local nuevo que todavía no ha abierto: abrirá próximamente.`],
+  ['¿Cuándo abre el local de Vecindario?', 'El local de Vecindario abrirá próximamente. Anunciaremos la fecha, el horario y las reservas online en esta web y en nuestro Instagram.'],
   ['¿Tiene parrilla el local de Vecindario?', 'No. El local de Vecindario no tiene parrilla; está pensado para las milanesas, los entrepanes y el sándwich de vacío al disco. Si buscas parrilla argentina, está en el <a href="las-palmas.html">local de Las Palmas</a>.'],
   ['¿Qué milanesas tienen en Vecindario?', `Napolitana, fugazzeta, a caballo, criolla, caprese y La Porteña (con salsa picante y jalapeños), todas de ternera empanada y desde ${fmtEuro(minMilanesa)}.`],
   ['¿Qué es el sándwich de vacío al disco?', 'Vacío de ternera desmenuzado al disco de arado y ahumado durante 6 horas al fuego de leña, que se sirve como sándwich y se personaliza con toppings (jalapeño, cebolla morada, chimichurri, criolla, queso de cabra, provolone o cheddar).'],
-  ['¿Hacen delivery en Vecindario?', 'Sí, el local de Vecindario tiene servicio de delivery.'],
-  ['¿Cómo se puede pagar en Vecindario?', 'Con ' + VC.payments + '.'],
+  ['¿Hacen delivery en Vecindario?', 'Sí, el local de Vecindario tendrá servicio de delivery cuando abra.'],
+  ['¿Cómo se podrá pagar en Vecindario?', 'Con ' + VC.payments + '.'],
   ['¿Tiene terraza el local de Vecindario?', 'Sí, el local de Vecindario tiene terraza exterior cubierta.'],
-  ['¿Se puede reservar mesa en Vecindario?', 'Sí, <a href="reservas.html?local=vecindario">reserva online</a> eligiendo día, hora y personas; recibes la confirmación por correo.']
+  ['¿Se puede reservar mesa en Vecindario?', 'Todavía no: el local aún no ha abierto. Las reservas online se activarán con la apertura. Mientras tanto puedes <a href="reservas.html?local=las-palmas">reservar en Las Palmas</a>.']
 ];
 const faqEventos = [
-  ['¿Se puede celebrar un cumpleaños en Cuartango Argentina?', 'Sí. Puedes festejar tu cumpleaños, una cena con amigos, una reunión familiar o una comida de empresa en nuestros locales de Las Palmas y Vecindario. Cuéntanos el local, la fecha y cuántas personas sois y te respondemos con una propuesta a tu medida.'],
-  ['¿En qué local puedo hacer mi evento?', 'En cualquiera de los dos. En <a href="las-palmas.html">Las Palmas</a> está la parrilla argentina, con terraza exterior y eventos privados; en <a href="vecindario.html">Vecindario</a> están las milanesas, los entrepanes y el sándwich de vacío al disco, con terraza exterior cubierta.'],
+  ['¿Se puede celebrar un cumpleaños en Cuartango Argentina?', 'Sí. Puedes festejar tu cumpleaños, una cena con amigos, una reunión familiar o una comida de empresa en nuestro local de Las Palmas, y pronto también en el nuevo local de Vecindario. Cuéntanos el local, la fecha y cuántas personas sois y te respondemos con una propuesta a tu medida.'],
+  ['¿En qué local puedo hacer mi evento?', 'Hoy, en <a href="las-palmas.html">Las Palmas</a>, donde está la parrilla argentina, con terraza exterior y eventos privados. El nuevo local de <a href="vecindario.html">Vecindario</a> (milanesas, entrepanes y sándwich de vacío al disco, con terraza exterior cubierta) abrirá próximamente.'],
   ['¿Cómo armo mi evento?', 'Rellena el formulario de esta página con el local, la fecha, el número de personas y lo que quieres celebrar. Te respondemos por correo o teléfono con una propuesta; no hay compromiso.'],
   ['¿Puedo reservar mesa para un grupo?', 'Sí. Hasta 10 personas puedes <a href="reservas.html">reservar online</a>. Para grupos mayores o celebraciones, usa el formulario de eventos o escríbenos a ' + D.email + '.'],
   ['¿Y si prefiero el evento en mi casa o en otro lugar?', 'Hacemos <a href="catering.html">catering argentino con parrillero</a> y llevamos la parrilla a tu celebración, desde ' + cheapest + ' € por persona.']
@@ -136,8 +137,8 @@ const aboutLP = `<h2>Parrilla argentina en Las Palmas de Gran Canaria</h2>
 <p>${BRAND} Las Palmas es nuestro local con parrilla argentina, en ${LP.address}, en la zona de Santa Catalina. Aquí trabajamos el asado a la brasa: entraña, vacío, costilla, entrecot y mollejas, y una parrillada para compartir con chorizo argentino, morcilla y provolone fundido.</p>
 <p>Si prefieres algo distinto, tenemos empanadas de carne cortada a cuchillo, milanesas, entrepanes artesanos como la Milonga o el Cuarteto, ensaladas y postres como la chocotorta. El local tiene terraza exterior, y puedes <a href="reservas.html?local=las-palmas">reservar online</a>.</p>`;
 const aboutVC = `<h2>Milanesas y entrepanes argentinos en Vecindario</h2>
-<p>${BRAND} Vecindario es nuestro local de milanesas y entrepanes, en ${VC.address}. No tiene parrilla: cocinamos fina milanesa de ternera empanada (napolitana, fugazzeta, a caballo, criolla, caprese y La Porteña), entrepanes artesanos con pan rústico, empanadas y el sándwich de vacío al disco, ahumado durante 6 horas al fuego de leña.</p>
-<p>El local tiene terraza exterior cubierta. De postre, chocotorta, budín de pan con dulce de leche o alfajor artesanal. Puedes <a href="reservas.html?local=vecindario">reservar online</a> o ver la <a href="menu.html?local=vecindario">carta de Vecindario</a>. Si buscas parrilla argentina, la tienes en el <a href="las-palmas.html">local de Las Palmas</a>.</p>`;
+<p>${BRAND} Vecindario es nuestro nuevo local de milanesas y entrepanes, en ${VC.address}, y abrirá próximamente. No tendrá parrilla: cocinaremos fina milanesa de ternera empanada (napolitana, fugazzeta, a caballo, criolla, caprese y La Porteña), entrepanes artesanos con pan rústico, empanadas y el sándwich de vacío al disco, ahumado durante 6 horas al fuego de leña.</p>
+<p>El local tiene terraza exterior cubierta. De postre, chocotorta, budín de pan con dulce de leche o alfajor artesanal. Ya puedes ver la <a href="menu.html?local=vecindario">carta de Vecindario</a>; las reservas online se activarán con la apertura. Si buscas parrilla argentina, la tienes en el <a href="las-palmas.html">local de Las Palmas</a>.</p>`;
 
 // ---------- pages ----------
 const pages = {
@@ -152,17 +153,17 @@ const pages = {
     desc: 'Parrilla argentina en Las Palmas de Gran Canaria (C. José Franchy Roca 9): parrillada, entraña, vacío, empanadas y milanesas. Horario, carta y reservas.',
     img: 'img/las-palmas-sirviendo.jpg', about: aboutLP, faq: faqLP,
     ld: [organization, restaurant('las-palmas', '/las-palmas', { image: [SITE + '/img/las-palmas-sirviendo.jpg', SITE + '/img/las-palmas-parrillada.jpg'] })] },
-  'vecindario.html': { path: '/vecindario', name: 'Vecindario', title: BRAND + ' Vecindario | Milanesas y entrepanes',
-    desc: 'Milanesas argentinas, entrepanes artesanos y sándwich de vacío al disco en Vecindario (C. Granada 22, Balos). Carta, horario y reservas online.',
+  'vecindario.html': { path: '/vecindario', name: 'Vecindario', title: BRAND + ' Vecindario | Próxima apertura, milanesas y entrepanes',
+    desc: 'Milanesas argentinas, entrepanes artesanos y sándwich de vacío al disco en Vecindario (C. Granada 22, Balos): nuevo local de próxima apertura. Mira su carta.',
     img: 'img/las-palmas-parrillada.jpg', about: aboutVC, faq: faqVC, ld: [organization, restaurant('vecindario', '/vecindario')] },
   'catering.html': { path: '/catering', name: 'Catering', title: 'Catering argentino en Gran Canaria | ' + BRAND,
     desc: `Catering argentino personalizado con parrillero y parrilla in situ en Gran Canaria: bodas, cumpleaños y eventos. Menús desde ${cheapest} € por persona.`,
     img: 'img/las-palmas-parrillada.jpg', faq: faqCatering, ld: [organization, cateringService] },
   'eventos.html': { path: '/eventos', name: 'Eventos', title: 'Festeja tu evento en nuestros locales | ' + BRAND,
-    desc: 'Arma tu cumpleaños, reunión o celebración en Cuartango Argentina, en Las Palmas o en Vecindario (Gran Canaria). Cuéntanos tu evento y te preparamos una propuesta.',
+    desc: 'Arma tu cumpleaños, reunión o celebración en Cuartango Argentina, en Las Palmas (Gran Canaria), y pronto en Vecindario. Cuéntanos tu evento y te preparamos una propuesta.',
     img: 'img/las-palmas-sirviendo.jpg', faq: faqEventos, ld: [organization, eventService] },
   'reservas.html': { path: '/reservas', name: 'Reservas', title: 'Reservar mesa | ' + BRAND,
-    desc: 'Reserva tu mesa online en ' + BRAND + ' Las Palmas o ' + BRAND + ' Vecindario. Confirmación por correo.',
+    desc: 'Reserva tu mesa online en ' + BRAND + ' Las Palmas. El local de Vecindario abrirá próximamente. Confirmación por correo.',
     img: 'img/las-palmas-sirviendo.jpg', ld: [organization] }
 };
 
@@ -200,11 +201,11 @@ fs.writeFileSync(path.join(root, 'sitemap.xml'), `<?xml version="1.0" encoding="
 fs.writeFileSync(path.join(root, 'robots.txt'), `User-agent: *\nAllow: /\nDisallow: /api/\n\nSitemap: ${SITE}/sitemap.xml\n`);
 fs.writeFileSync(path.join(root, 'llms.txt'), `# ${BRAND}
 
-> Restaurante argentino con dos locales en Gran Canaria (España): parrilla argentina en Las Palmas de Gran Canaria y milanesas, entrepanes y sándwich de vacío al disco en Vecindario. También hace catering argentino con parrillero. También conocido como Cuartango Entrepanes.
+> Restaurante argentino en Gran Canaria (España): parrilla argentina en Las Palmas de Gran Canaria y, de próxima apertura, un local de milanesas, entrepanes y sándwich de vacío al disco en Vecindario. También hace catering argentino con parrillero. También conocido como Cuartango Entrepanes.
 
 ## Locales
 - Las Palmas (con parrilla): ${LP.address}. Teléfono ${LP.phone}. Horario: ${hoursText(LP.hours)} ${SITE}/las-palmas
-- Vecindario (sin parrilla): ${VC.address}. ${SITE}/vecindario
+- Vecindario (sin parrilla, PRÓXIMA APERTURA: todavía no ha abierto, sin reservas online): ${VC.address}. ${SITE}/vecindario
 
 ## Qué se come
 - Las Palmas: parrillada, entraña, vacío, costilla, entrecot, mollejas, morcilla, empanadas, provolone, milanesas, entrepanes y ensaladas.

@@ -48,7 +48,7 @@ async function loadDay(env, key, dateStr) {
 
 export async function computeSlots(env, key, dateStr, party, now = new Date()) {
   const v = VENUES[key];
-  if (!v.hours) return { enabled: false, reason: "sin_horario", slots: [] };
+  if (!v.hours || v.comingSoon) return { enabled: false, reason: v.comingSoon ? "proximamente" : "sin_horario", slots: [] };
   const ranges = v.hours[weekday(dateStr)] || [];
   if (!ranges.length) return { enabled: true, closed: true, slots: [] };
   const occ = await loadDay(env, key, dateStr);
@@ -76,7 +76,7 @@ export async function handleAvailability(request, env) {
   const u = new URL(request.url), venue = u.searchParams.get("venue"), date = u.searchParams.get("date"), party = Number(u.searchParams.get("party"));
   const bad = checkRequest(venue, date, party);
   if (bad) return json({ error: "invalid_" + bad }, 400);
-  if (!VENUES[venue].hours) return json({ enabled: false, reason: "sin_horario", slots: [] });
+  if (!VENUES[venue].hours || VENUES[venue].comingSoon) return json({ enabled: false, reason: VENUES[venue].comingSoon ? "proximamente" : "sin_horario", slots: [] });
   if (!isConfigured(env, venue)) return json({ error: "not_configured" }, 503);
   try { return json(await computeSlots(env, venue, date, party)); } catch (e) { return json({ error: "calendar_unavailable" }, 502); }
 }
@@ -96,7 +96,7 @@ export async function handleBook(request, env) {
   const bad = checkRequest(venue, date, party) || (!isTime(time || "") && "time") || (name.length < 2 || name.length > 80) && "name" ||
     (!/^[+\d][\d\s().-]{5,19}$/.test(phone) && "phone") || (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email) && "email") || (notes.length > 500 && "notes") || (d.consent !== true && "consent");
   if (bad) return json({ error: "invalid_" + bad }, 400);
-  if (!VENUES[venue].hours) return json({ error: "booking_disabled" }, 409);
+  if (!VENUES[venue].hours || VENUES[venue].comingSoon) return json({ error: "booking_disabled" }, 409);
   if (!isConfigured(env, venue)) return json({ error: "not_configured" }, 503);
   if (!(await verifyTurnstile(request, env, d.turnstile))) return json({ error: "antispam" }, 400);
 
