@@ -6,9 +6,9 @@
 
   // ---------- shared header / footer ----------
   const links = [
-    ["index.html", "Inicio", "home"], ["menu.html", "Carta", "menu"],
+    ["menu.html", "Carta", "menu"],
     ["las-palmas.html", "Las Palmas", "las-palmas"], ["vecindario.html", "Vecindario", "vecindario"],
-    ["eventos.html", "Eventos", "eventos"], ["catering.html", "Catering", "catering"]
+    ["eventos.html", "Eventos", "eventos"], ["catering.html", "Catering", "catering"], ["nosotros.html", "Nosotros", "nosotros"]
   ];
   const nav = links.map(([h, t, k]) => `<a href="${h}"${k === page ? ' aria-current="page"' : ""}>${t}</a>`).join("");
   document.body.insertAdjacentHTML("afterbegin",

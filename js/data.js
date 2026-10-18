@@ -40,7 +40,7 @@ window.CUARTANGO = {
   },
   // Sources: "carta original - las palmas.pdf" and "carta cuartango milaneseria 2.pdf". Allergen data not provided: left out on purpose.
   // Dish photos: save as img/menu/<slug>.jpg (e.g. milonga.jpg, parrillada.jpg) and add the slug here.
-  photos: [],
+  photos: ["empanadas", "pimientos-rellenos", "pina-asada-con-helado-de-vainilla", "parrillada", "costilla-de-ternera"],
   menus: {
     "las-palmas": {
       "pdf": "img/carta-las-palmas.pdf",

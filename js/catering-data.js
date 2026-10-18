@@ -18,17 +18,17 @@ window.CATERING = {
   ],
   includes: "Todos los menús incluyen salsa criolla, chimichurri, cuartonesa y pan.",
   menus: [
-    { name: "Menú Gaucho", price: 40, sections: [
+    { name: "Menú Gaucho", price: 40, img: "img/media/pollo-chorizos.jpg", imgPos: "50% 18%", imgAlt: "Muslos de pollo y chorizos a la parrilla", sections: [
       ["Entrantes", ["Chorizo argentino", "Empanada de carne y de pollo"]],
       ["Primeros", ["Pimientos rellenos de queso y huevo", "Muslos de pollo marinados"]],
       ["Segundos", ["Entraña de ternera", "Vacío a la salmuera", "Costillas de ternera"]],
       ["Postre", ["Piña a la parrilla con helado de vainilla y dulce de leche"]] ] },
-    { name: "Menú Piola", price: 48, sections: [
+    { name: "Menú Piola", price: 48, img: "img/media/ensalada-gaucha.jpg", imgAlt: "Ensalada gaucha con rúcula, tomate cherry y queso", sections: [
       ["Entrantes", ["Ensalada gaucha: rúcula, tomate cherry, queso de cabra y albariño", "Empanada de carne y de pollo"]],
       ["Primeros", ["Pimientos rellenos de queso y huevo", "Muslos de pollo marinados", "Chorizo argentino"]],
       ["Segundos", ["Entraña de ternera", "Vacío a la salmuera", "Costillar de ternera"]],
       ["Postre", ["Piña a la parrilla con helado de vainilla y dulce de leche"]] ] },
-    { name: "Menú Cheto", price: 58, sections: [
+    { name: "Menú Cheto", price: 58, img: "img/media/costillar-primer-plano.jpg", imgAlt: "Costillar de ternera con romero en la parrilla", sections: [
       ["Entrantes", ["Ensalada gaucha: rúcula, tomate cherry, queso de cabra y albariño", "Queso provoleta", "Chinchulín y mollejas de ternera", "Pimientos rellenos de queso y huevo"]],
       ["Primeros", ["Muslos de pollo marinados", "Secreto ibérico"]],
       ["Segundos", ["Entraña de ternera", "Chorizo argentino", "Costillar de ternera"]],

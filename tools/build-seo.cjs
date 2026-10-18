@@ -125,6 +125,11 @@ const faqEventos = [
   ['¿Puedo reservar mesa para un grupo?', 'Sí. Hasta 10 personas puedes <a href="reservas.html">reservar online</a>. Para grupos mayores o celebraciones, usa el formulario de eventos o escríbenos a ' + D.email + '.'],
   ['¿Y si prefiero el evento en mi casa o en otro lugar?', 'Hacemos <a href="catering.html">catering argentino con parrillero</a> y llevamos la parrilla a tu celebración, desde ' + cheapest + ' € por persona.']
 ];
+const faqNosotros = [
+  ['¿Cómo cocinan en Cuartango Argentina?', 'Al más puro estilo tradicional argentino: con leña y brasa, y con parrilleros expertos que dominan el arte del asado. Cortamos la carne a cuchillo y presentamos cada plato de forma rústica y elegante, combinando lo criollo con lo gourmet.'],
+  ['¿Qué platos son típicos de la parrilla de Cuartango Argentina?', 'Entraña, vacío, costillar de ternera, chorizo argentino, pimientos rellenos de queso y huevo, empanadas de carne y de pollo y, de postre, piña a la parrilla con helado de vainilla y dulce de leche.'],
+  ['¿Dónde puedo probar la cocina de Cuartango Argentina?', 'En el local de <a href="las-palmas.html">Las Palmas de Gran Canaria</a>, donde está la parrilla; el nuevo local de <a href="vecindario.html">Vecindario</a> abrirá próximamente. También llevamos la parrilla a tu evento con nuestro <a href="catering.html">catering con parrillero</a>.']
+];
 const faqCatering = [
   ['¿Cuánto cuesta el catering argentino de Cuartango Argentina?', `Hay tres menús con parrillero: ${C.menus.map((m) => `${m.name} (${m.price} € por persona)`).join(', ')}. Si pides factura, el IVA/IGIC no está incluido.`],
   ['¿Qué incluye el servicio?', 'Parrillero profesional y ayudantes (show cook), montaje de la parrilla en el lugar, servicio de camareros, transporte e instalación. Vajilla y menaje y barra libre son opcionales.'],
@@ -158,10 +163,13 @@ const pages = {
     img: 'img/las-palmas-parrillada.jpg', about: aboutVC, faq: faqVC, ld: [organization, restaurant('vecindario', '/vecindario')] },
   'catering.html': { path: '/catering', name: 'Catering', title: 'Catering argentino en Gran Canaria | ' + BRAND,
     desc: `Catering argentino personalizado con parrillero y parrilla in situ en Gran Canaria: bodas, cumpleaños y eventos. Menús desde ${cheapest} € por persona.`,
-    img: 'img/las-palmas-parrillada.jpg', faq: faqCatering, ld: [organization, cateringService] },
+    img: 'img/media/costillar-cruz.jpg', faq: faqCatering, ld: [organization, cateringService] },
+  'nosotros.html': { path: '/nosotros', name: 'Nosotros', title: 'Nuestra cocina | ' + BRAND,
+    desc: 'Fuego, brasa y tradición argentina: así cocinamos en ' + BRAND + '. Parrilleros expertos, carne cortada a cuchillo y presentación cuidada, en Gran Canaria.',
+    img: 'img/media/costillar-cruz.jpg', faq: faqNosotros, ld: [organization, { '@type': 'AboutPage', '@id': SITE + '/nosotros#about', url: SITE + '/nosotros', name: 'Nuestra cocina', isPartOf: { '@id': SITE + '/#website' }, about: { '@id': SITE + '/#org' }, inLanguage: 'es-ES' }] },
   'eventos.html': { path: '/eventos', name: 'Eventos', title: 'Festeja tu evento en nuestros locales | ' + BRAND,
     desc: 'Arma tu cumpleaños, reunión o celebración en Cuartango Argentina, en Las Palmas (Gran Canaria), y pronto en Vecindario. Cuéntanos tu evento y te preparamos una propuesta.',
-    img: 'img/las-palmas-sirviendo.jpg', faq: faqEventos, ld: [organization, eventService] },
+    img: 'img/media/mesa-banquete.jpg', faq: faqEventos, ld: [organization, eventService] },
   'reservas.html': { path: '/reservas', name: 'Reservas', title: 'Reservar mesa | ' + BRAND,
     desc: 'Reserva tu mesa online en ' + BRAND + ' Las Palmas. El local de Vecindario abrirá próximamente. Confirmación por correo.',
     img: 'img/las-palmas-sirviendo.jpg', ld: [organization] }
@@ -217,6 +225,7 @@ fs.writeFileSync(path.join(root, 'llms.txt'), `# ${BRAND}
 - Carta con precios: ${SITE}/menu
 - Celebraciones y eventos en nuestros locales (cumpleaños, reuniones, cenas de empresa): ${SITE}/eventos
 - Catering argentino con parrillero (menús desde ${cheapest} € por persona, mínimo 25 comensales): ${SITE}/catering
+- Nuestra cocina (fuego, brasa y tradición): ${SITE}/nosotros
 - Contacto: ${D.email}
 `);
 console.log('SEO regenerated for', Object.keys(pages).length, 'pages; llms.txt, sitemap and robots written');

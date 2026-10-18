@@ -140,7 +140,7 @@ table.hours tr.today{background:#f8f2e8}table.hours tr.today th,table.hours tr.t
 .hero-video,.hero-shade{display:none}
 .hero-in{position:relative;z-index:2}
 .hero.has-video .hero-video{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.hero.has-video .hero-shade{display:block;position:absolute;inset:0;background:linear-gradient(180deg,rgba(43,29,23,.55),rgba(43,29,23,.7))}
+.hero.has-video .hero-shade{display:block;position:absolute;inset:0;background:linear-gradient(180deg,rgba(43,29,23,.34),rgba(43,29,23,.56))}
 .hero.has-video{min-height:min(86vh,720px);display:flex;align-items:center}
 .hero.has-video .slogan{color:#f6efe4}
 .hero.has-video .btn.ghost{color:#f6efe4;border-color:#f6efe4}
@@ -366,7 +366,7 @@ nav.main{margin-left:auto}
 .tri-p:nth-child(1),.tri-p:nth-child(3){margin-bottom:44px}
 .tri-m{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.4s cubic-bezier(.2,.7,.2,1),filter .6s}
 .tri-p::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(28,19,15,.78))}
-.tri-p figcaption{position:absolute;left:18px;bottom:16px;z-index:2;color:#f6efe4;font-family:var(--display);font-size:1.7rem;font-style:italic;letter-spacing:.01em;transform:translateY(8px);opacity:.92;transition:transform .5s,opacity .5s}
+.tri-p figcaption{position:absolute;left:16px;right:10px;bottom:16px;z-index:2;color:#f6efe4;font-family:var(--display);font-size:1.4rem;line-height:1.15;font-style:italic;letter-spacing:.01em;transform:translateY(8px);opacity:.92;transition:transform .5s,opacity .5s}
 .tri-p figcaption::before{content:"";display:block;width:34px;height:1px;background:var(--brass-l);margin-bottom:8px}
 .tri:hover .tri-p:not(:hover){flex:.8}
 .tri-p:hover,.tri-p:focus-visible,.tri-p.on{flex:1.7}
@@ -431,3 +431,61 @@ nav.main{margin-left:auto}
   nav.main a:not(.btn){font-size:.72rem;letter-spacing:.08em}
   header.site .btn.reserve{padding:9px 14px;font-size:.72rem;letter-spacing:.1em}
 }
+
+/* ===== carousel with mixed landscape / portrait slides ===== */
+.gal-track{align-items:center}
+.gal-s{flex:0 0 auto;width:auto;height:clamp(300px,46vw,540px);aspect-ratio:16/9}
+.gal-s.p{aspect-ratio:9/16}
+@media(max-width:700px){
+  .gal-s{height:auto;width:86%;aspect-ratio:4/5}
+  .gal-s.p{width:62%;aspect-ratio:9/16}
+}
+
+/* ===== before / after comparison ===== */
+.cmp{position:relative;aspect-ratio:4/3;max-width:980px;margin:0 auto 28px;overflow:hidden;background:var(--walnut);box-shadow:var(--shadow);user-select:none;-webkit-user-select:none}
+.cmp-l{position:absolute;inset:0}
+.cmp-m{width:100%;height:100%;object-fit:cover;display:block}
+.cmp-a{clip-path:inset(0 calc(100% - var(--p)) 0 0)}
+.cmp-bar{position:absolute;top:0;bottom:0;left:var(--p);width:2px;margin-left:-1px;background:#f6efe4;pointer-events:none;box-shadow:0 0 12px rgba(0,0,0,.35)}
+.cmp-bar i{position:absolute;top:50%;left:50%;width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%;border:1.5px solid #f6efe4;background:rgba(28,19,15,.55);backdrop-filter:blur(4px)}
+.cmp-bar i::before,.cmp-bar i::after{content:"";position:absolute;top:50%;width:8px;height:8px;margin-top:-4px;border-top:1.5px solid #f6efe4;border-left:1.5px solid #f6efe4}
+.cmp-bar i::before{left:13px;transform:rotate(-45deg)}.cmp-bar i::after{right:13px;transform:rotate(135deg)}
+.cmp-r{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize;touch-action:pan-y}
+.cmp:focus-within{outline:2px solid var(--blue);outline-offset:3px}
+.cmp-tag{position:absolute;bottom:16px;padding:5px 12px;background:rgba(28,19,15,.72);color:#f6efe4;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase}
+.cmp-tag-a{left:16px}.cmp-tag-b{right:16px}
+.cmp figcaption{position:absolute;top:14px;left:0;right:0;text-align:center;color:#f6efe4;font-family:var(--display);font-style:italic;font-size:1.5rem;text-shadow:0 2px 14px rgba(0,0,0,.6);pointer-events:none}
+@media(max-width:700px){.cmp{aspect-ratio:4/5}.cmp figcaption{font-size:1.2rem}}
+
+/* ===== story: from the fire to the table ===== */
+.story{display:grid;grid-template-columns:1fr minmax(260px,400px);gap:clamp(24px,6vw,90px);align-items:start}
+.story-steps{list-style:none;margin:0;padding:0}
+.story-s{min-height:72vh;display:flex;flex-direction:column;justify-content:center;opacity:.32;transition:opacity .7s}
+.story-s.on{opacity:1}
+.story-s h3{font-size:clamp(1.9rem,3.4vw,2.6rem);margin-bottom:.35em}
+.story-s p{font-size:1.1rem;max-width:44ch;margin:0}
+.story-n{font-family:var(--display);font-size:clamp(3.2rem,6vw,5rem);line-height:1;color:var(--brass-l);margin-bottom:6px}
+.story-m{display:none}
+.story-stage{position:sticky;top:96px;aspect-ratio:9/16;max-height:calc(100vh - 130px);margin-left:auto;width:100%;overflow:hidden;background:var(--walnut);box-shadow:var(--shadow);border:1px solid var(--brass-l);padding:0}
+.story-v{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .9s ease}
+.story-v.on{opacity:1}
+.story-count{position:absolute;left:16px;bottom:14px;z-index:2;color:#f6efe4;font-size:.78rem;letter-spacing:.2em}
+.story-count b{font-family:var(--display);font-size:1.7rem;font-weight:500;letter-spacing:.02em}
+@media(max-width:860px){
+  .story{grid-template-columns:1fr}
+  .story-stage{display:none}
+  .story-s{min-height:0;opacity:1;padding:0 0 34px;margin-bottom:34px;border-bottom:1px solid var(--line)}
+  .story-m{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;margin-bottom:18px;background:var(--walnut)}
+}
+@media(prefers-reduced-motion:reduce){.story-s,.story-v{transition:none}}
+
+/* hero text a bit lighter on media heroes of inner pages */
+.hero.has-video .wrap.hero-in h1{text-shadow:0 2px 24px rgba(0,0,0,.35)}
+.menu-card .menu-photo{margin:-30px -30px 18px;aspect-ratio:16/10;overflow:hidden;background:var(--walnut)}
+.menu-card .menu-photo img{width:100%;height:100%;object-fit:cover}
+.story-steps{grid-column:1;grid-row:1}
+.story-stage{grid-column:2;grid-row:1}
+@media(max-width:860px){.story-steps{grid-column:1}}
+.story-s{min-height:min(72vh,620px)}
+.story-stage{max-height:min(calc(100vh - 130px),760px)}
+@media(max-width:860px){.story-s{min-height:0}}

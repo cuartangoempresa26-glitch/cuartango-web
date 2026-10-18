@@ -5,7 +5,8 @@
   const page = document.body.dataset.page, M = (window.MEDIA || {})[page] || {};
   const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches || !!(navigator.connection && navigator.connection.saveData);
+  // ?static in the URL turns every animation off (used to take clean screenshots)
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches || !!(navigator.connection && navigator.connection.saveData) || /[?&]static/.test(location.search);
   const isVid = (it) => it.type === "video" || /\.(mp4|webm)$/i.test(it.src);
   const media = (it, cls) => isVid(it)
     ? `<video class="${cls}" muted loop playsinline preload="metadata"${it.poster ? ` poster="${esc(it.poster)}"` : ""} data-src="${esc(it.src)}" aria-label="${esc(it.alt)}" style="object-position:${esc(it.pos || "50% 50%")}"></video>`
@@ -63,7 +64,7 @@
   const gallery = (box, items) => {
     box.innerHTML = `<div class="gal" role="region" aria-roledescription="carrusel" aria-label="Galería de imágenes">
       <div class="gal-track" tabindex="0">${items.map((it, i) =>
-        `<figure class="gal-s" data-i="${i}">${media(it, "gal-m")}${it.caption ? `<figcaption>${esc(it.caption)}</figcaption>` : ""}<button class="gal-zoom" type="button" aria-label="Ver a pantalla completa: ${esc(it.alt)}"></button></figure>`).join("")}</div>
+        `<figure class="gal-s${it.p ? " p" : ""}" data-i="${i}">${media(it, "gal-m")}${it.caption ? `<figcaption>${esc(it.caption)}</figcaption>` : ""}<button class="gal-zoom" type="button" aria-label="Ver a pantalla completa: ${esc(it.alt)}"></button></figure>`).join("")}</div>
       <div class="gal-ctl"><div class="gal-dots">${items.map((_, i) => `<button type="button" aria-label="Ir a la imagen ${i + 1}"></button>`).join("")}</div>
         <div class="gal-btns"><button type="button" class="gal-prev" aria-label="Anterior">‹</button><button type="button" class="gal-next" aria-label="Siguiente">›</button></div></div></div>`;
     const tr = $(".gal-track", box), slides = $$(".gal-s", tr), dots = $$(".gal-dots button", box);
@@ -94,19 +95,63 @@
     watchVideos(tr);
   };
 
+  // ---------- before / after comparison ----------
+  const compare = (box, list) => {
+    box.innerHTML = list.map((c, k) => `<figure class="cmp" style="--p:50%" data-k="${k}">
+      <div class="cmp-l cmp-b">${media(c.b, "cmp-m")}<span class="cmp-tag cmp-tag-b">${esc(c.b.label)}</span></div>
+      <div class="cmp-l cmp-a">${media(c.a, "cmp-m")}<span class="cmp-tag cmp-tag-a">${esc(c.a.label)}</span></div>
+      <span class="cmp-bar" aria-hidden="true"><i></i></span>
+      <input class="cmp-r" type="range" min="0" max="100" value="50" aria-label="${esc(c.title || "Comparar")}: desliza para ver ${esc(c.a.label)} y ${esc(c.b.label)}">
+      ${c.title ? `<figcaption>${esc(c.title)}</figcaption>` : ""}</figure>`).join("");
+    $$(".cmp", box).forEach((f) => {
+      const r = $(".cmp-r", f), set = (v) => f.style.setProperty("--p", v + "%");
+      r.addEventListener("input", () => { f.classList.add("touched"); set(r.value); });
+      if (!reduce && "IntersectionObserver" in window) { // a single gentle demo so people notice it can be dragged
+        const io = new IntersectionObserver((es) => es.forEach((e) => {
+          if (!e.isIntersecting || f.classList.contains("touched")) return; io.disconnect();
+          const t0 = performance.now(), run = (t) => { const k = (t - t0) / 2600; if (k >= 1 || f.classList.contains("touched")) { if (!f.classList.contains("touched")) { r.value = 50; set(50); } return; }
+            const v = 50 + Math.sin(k * Math.PI * 2) * 24 * (1 - k * 0.3); r.value = v; set(v.toFixed(1)); requestAnimationFrame(run); }; requestAnimationFrame(run);
+        }), { threshold: 0.6 }); io.observe(f);
+      }
+    });
+    watchVideos(box);
+  };
+
+  // ---------- story: fire to table (sticky video on desktop, stacked on phones) ----------
+  const story = (box, steps) => {
+    box.innerHTML = `<div class="story"><div class="story-stage" aria-hidden="true">${steps.map((s, i) =>
+        `<video class="story-v${i ? "" : " on"}" muted loop playsinline preload="none" data-src="${esc(s.src)}"${s.poster ? ` poster="${esc(s.poster)}"` : ""}></video>`).join("")}
+        <span class="story-count"><b>01</b> / ${String(steps.length).padStart(2, "0")}</span></div>
+      <ol class="story-steps">${steps.map((s, i) => `<li class="story-s${i ? "" : " on"}" data-i="${i}"><video class="story-m" muted loop playsinline preload="none" data-src="${esc(s.src)}"${s.poster ? ` poster="${esc(s.poster)}"` : ""} aria-label="${esc(s.title)}"></video>
+        <span class="story-n">${String(i + 1).padStart(2, "0")}</span><h3>${esc(s.title)}</h3><p>${esc(s.text)}</p></li>`).join("")}</ol></div>`;
+    const stage = $$(".story-v", box), items = $$(".story-s", box), cnt = $(".story-count b", box);
+    let cur = -1;
+    const act = (i) => {
+      if (i === cur) return; cur = i;
+      items.forEach((x, k) => x.classList.toggle("on", k === i));
+      stage.forEach((v, k) => { v.classList.toggle("on", k === i); if (k === i) { if (!v.src) v.src = v.dataset.src; if (!reduce) v.play().catch(() => {}); } else v.pause(); });
+      cnt.textContent = String(i + 1).padStart(2, "0");
+    };
+    if ("IntersectionObserver" in window) {
+      const so = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) act(+e.target.dataset.i); }), { rootMargin: "-42% 0px -42% 0px" });
+      items.forEach((x) => so.observe(x));
+    }
+    act(0);
+    if (vio && !reduce) $$(".story-m", box).forEach((v) => vio.observe(v)); // phone videos play only while visible
+  };
+
   // ---------- build the blocks (only with valid items) ----------
-  const check = (it) => new Promise((ok) => {
-    if (isVid(it)) return ok(true);
-    const im = new Image(); im.onload = () => ok(true); im.onerror = () => ok(false); im.src = it.src;
-  });
+  // cheap existence test (HEAD) so missing files never leave a hole, without downloading every image up front
+  const check = (it) => isVid(it) ? Promise.resolve(true) : fetch(it.src, { method: "HEAD" }).then((r) => r.ok).catch(() => true);
   $$("[data-media]").forEach(async (box) => {
     const kind = box.dataset.media, list = M[kind] || [];
-    const ok = (await Promise.all(list.map(check))).map((v, i) => v && list[i]).filter(Boolean);
+    const chk = (it) => kind === "compare" ? Promise.all([check(it.a), check(it.b)]).then(([x, y]) => x && y) : kind === "story" ? Promise.resolve(true) : check(it);
+    const ok = (await Promise.all(list.map(chk))).map((v, i) => v && list[i]).filter(Boolean);
     const need = kind === "triptych" ? 3 : 1;
     const wrap = box.closest("[data-media-wrap]") || box;
     if (ok.length < need) { wrap.hidden = true; return; }
     wrap.hidden = false;
-    (kind === "triptych" ? triptych : gallery)(box, kind === "triptych" ? ok.slice(0, 3) : ok);
+    ({ triptych, gallery, compare, story }[kind])(box, kind === "triptych" ? ok.slice(0, 3) : ok);
     box.setAttribute("data-reveal", "");
     revealWatch(box);
   });

@@ -6,7 +6,7 @@
   $("#c-why").innerHTML = C.why.map((t) => `<li>${esc(t)}</li>`).join("");
   $("#c-services").innerHTML = C.services.map(([t, d]) => `<div class="card"><h3>${esc(t)}</h3>${d ? `<p class="muted">${esc(d)}</p>` : ""}</div>`).join("");
   $("#c-includes").textContent = C.includes;
-  $("#c-menus").innerHTML = C.menus.map((m) => `<article class="card menu-card"><h3>${esc(m.name)}</h3>
+  $("#c-menus").innerHTML = C.menus.map((m) => `<article class="card menu-card">${m.img ? `<div class="menu-photo"><img loading="lazy" src="${esc(m.img)}" alt="${esc(m.imgAlt || m.name)}" style="object-position:${esc(m.imgPos || "50% 50%")}"></div>` : ""}<h3>${esc(m.name)}</h3>
     <div class="price">${m.price} €<small> / persona</small></div>
     ${m.sections.map(([h, l]) => `<h4>${esc(h)}</h4><ul>${l.map((i) => `<li>${esc(i)}</li>`).join("")}</ul>`).join("")}</article>`).join("");
   $("#c-canapes").innerHTML = C.canapes.map((t) => `<li>${esc(t)}</li>`).join("");
