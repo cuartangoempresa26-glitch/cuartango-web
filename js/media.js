@@ -61,10 +61,10 @@
   };
 
   // ---------- carousel ----------
-  const gallery = (box, items) => {
-    box.innerHTML = `<div class="gal" role="region" aria-roledescription="carrusel" aria-label="Galería de imágenes">
+  const gallery = (box, items, reels) => {
+    box.innerHTML = `<div class="gal${reels ? " reels" : ""}" role="region" aria-roledescription="carrusel" aria-label="Galería de imágenes">
       <div class="gal-track" tabindex="0">${items.map((it, i) =>
-        `<figure class="gal-s${it.p ? " p" : ""}" data-i="${i}">${media(it, "gal-m")}${it.caption ? `<figcaption>${esc(it.caption)}</figcaption>` : ""}<button class="gal-zoom" type="button" aria-label="Ver a pantalla completa: ${esc(it.alt)}"></button></figure>`).join("")}</div>
+        `<figure class="gal-s" data-i="${i}" style="--ar:${esc(it.ar || "16/9")}">${media(it, "gal-m")}${it.caption ? `<figcaption>${esc(it.caption)}</figcaption>` : ""}<button class="gal-zoom" type="button" aria-label="Ver a pantalla completa: ${esc(it.alt)}"></button></figure>`).join("")}</div>
       <div class="gal-ctl"><div class="gal-dots">${items.map((_, i) => `<button type="button" aria-label="Ir a la imagen ${i + 1}"></button>`).join("")}</div>
         <div class="gal-btns"><button type="button" class="gal-prev" aria-label="Anterior">‹</button><button type="button" class="gal-next" aria-label="Siguiente">›</button></div></div></div>`;
     const tr = $(".gal-track", box), slides = $$(".gal-s", tr), dots = $$(".gal-dots button", box);
@@ -97,7 +97,7 @@
 
   // ---------- before / after comparison ----------
   const compare = (box, list) => {
-    box.innerHTML = list.map((c, k) => `<figure class="cmp" style="--p:50%" data-k="${k}">
+    box.innerHTML = list.map((c, k) => `<figure class="cmp${(c.ar || "16/9") === "16/9" ? "" : " v"}" style="--p:50%;--ar:${esc(c.ar || "16/9")}" data-k="${k}">
       <div class="cmp-l cmp-b">${media(c.b, "cmp-m")}<span class="cmp-tag cmp-tag-b">${esc(c.b.label)}</span></div>
       <div class="cmp-l cmp-a">${media(c.a, "cmp-m")}<span class="cmp-tag cmp-tag-a">${esc(c.a.label)}</span></div>
       <span class="cmp-bar" aria-hidden="true"><i></i></span>
@@ -151,7 +151,7 @@
     const wrap = box.closest("[data-media-wrap]") || box;
     if (ok.length < need) { wrap.hidden = true; return; }
     wrap.hidden = false;
-    ({ triptych, gallery, compare, story }[kind])(box, kind === "triptych" ? ok.slice(0, 3) : ok);
+    ({ triptych, gallery, reels: (b, l) => gallery(b, l, true), compare, story }[kind])(box, kind === "triptych" ? ok.slice(0, 3) : ok);
     box.setAttribute("data-reveal", "");
     revealWatch(box);
   });

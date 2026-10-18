@@ -14,6 +14,12 @@ export default {
       url.hostname = url.hostname.slice(4);
       return Response.redirect(url.toString(), 301);
     }
+    // argentina.cuartango.com = link-in-bio page (bio.html); its images/css live in the same assets, everything else belongs to the main site
+    if (url.hostname === "argentina.cuartango.com") {
+      if (url.pathname === "/") return env.ASSETS.fetch(new Request(new URL("/bio", url), request));
+      if (/^\/(img|css)\//.test(url.pathname)) return env.ASSETS.fetch(request);
+      return Response.redirect("https://cuartango.com" + url.pathname + url.search, 302);
+    }
     // QR codes printed in the venues point here, so the destination can change without reprinting.
     const qr = { "/qr/las-palmas": "/menu?local=las-palmas", "/qr/vecindario": "/menu?local=vecindario", "/qr": "/menu" }[url.pathname.replace(/\/$/, "")];
     if (qr) return Response.redirect(url.origin + qr + (qr.includes("?") ? "&" : "?") + "utm_source=qr", 302);

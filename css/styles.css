@@ -489,3 +489,17 @@ nav.main{margin-left:auto}
 .story-s{min-height:min(72vh,620px)}
 .story-stage{max-height:min(calc(100vh - 130px),760px)}
 @media(max-width:860px){.story-s{min-height:0}}
+
+/* ===== formats are respected: every slide / comparison keeps its own aspect ratio ===== */
+.gal-s{flex:0 0 auto;width:auto;height:clamp(280px,40vw,500px);aspect-ratio:var(--ar,16/9)}
+.gal.reels .gal-s{height:clamp(340px,42vw,520px)}
+.cmp{aspect-ratio:var(--ar,16/9)}
+.cmp.v{max-width:380px}
+@media(max-width:700px){
+  .gal-s{height:auto;width:88%;aspect-ratio:var(--ar,16/9)}
+  .gal.reels .gal-s{width:64%}
+  .cmp{aspect-ratio:var(--ar,16/9)}
+  .cmp.v{max-width:88%}
+}
+.gal-s{opacity:.78}
+.gal-s.on{opacity:1}
