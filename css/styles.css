@@ -503,3 +503,14 @@ nav.main{margin-left:auto}
 }
 .gal-s{opacity:.78}
 .gal-s.on{opacity:1}
+
+/* floating WhatsApp button: small, bottom-right, clear of the mobile bar and the content */
+.wa{position:fixed;right:16px;bottom:18px;z-index:25;display:flex;align-items:center;gap:0;height:46px;min-width:46px;padding:0 13px;border-radius:23px;background:#25a05a;color:#fff;text-decoration:none;box-shadow:0 6px 18px -6px rgba(31,35,38,.45),0 0 0 3px rgba(250,248,244,.9);opacity:0;transform:translateY(8px);animation:wa-in .6s ease 1.4s forwards;transition:background .25s,padding .3s}
+.wa svg{width:22px;height:22px;fill:currentColor;flex:none}
+.wa span{max-width:0;overflow:hidden;white-space:nowrap;font:500 .76rem var(--body);letter-spacing:.1em;text-transform:uppercase;transition:max-width .35s ease,margin .35s ease}
+.wa:hover,.wa:focus-visible{background:#1e8a4b;padding-right:16px}
+.wa:hover span,.wa:focus-visible span{max-width:120px;margin-left:9px}
+@keyframes wa-in{to{opacity:1;transform:none}}
+@media(max-width:860px){.wa{bottom:68px;right:12px;height:44px;min-width:44px;padding:0 11px}.wa:hover span{max-width:0;margin:0}.wa:hover{padding-right:11px}}
+@media(prefers-reduced-motion:reduce){.wa{animation:none;opacity:1;transform:none}.wa span{transition:none}}
+@media print{.wa{display:none}}

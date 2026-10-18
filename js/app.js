@@ -37,6 +37,13 @@
      <div class="wrap muted" style="margin-top:24px;font-size:.85rem">© ${new Date().getFullYear()} Cuartango Argentina · <a href="aviso-legal.html">Aviso legal</a> · <a href="privacidad.html">Privacidad</a> · <a href="cookies.html">Cookies</a></div></footer>
      <div class="mobilebar"><a href="tel:${lp.phone.replace(/\s/g, "")}">Llamar</a><a href="${lp.maps}" target="_blank" rel="noopener">Cómo llegar</a></div>`);
 
+  // ---------- floating WhatsApp button (discreet; opens only when tapped) ----------
+  const wa = "https://wa.me/34656441966?text=" + encodeURIComponent("Hola, os escribo desde la web de Cuartango Argentina.");
+  document.body.insertAdjacentHTML("beforeend",
+    `<a class="wa" href="${wa}" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
+       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2a9.93 9.93 0 0 0-8.45 15.17L2 22l4.97-1.56A9.93 9.93 0 1 0 12.04 2Zm0 1.8a8.13 8.13 0 1 1-4.3 15.04l-.31-.19-2.95.93.96-2.87-.2-.32A8.13 8.13 0 0 1 12.04 3.8ZM8.6 7.5c-.2 0-.5 0-.75.37-.26.37-.98.96-.98 2.34s1 2.7 1.14 2.89c.14.18 1.96 3.1 4.84 4.23 2.39.94 2.88.75 3.4.7.52-.05 1.68-.69 1.92-1.35.24-.66.24-1.23.17-1.35-.07-.12-.26-.19-.54-.33l-1.84-.9c-.25-.12-.43-.17-.6.1l-.84 1.05c-.15.19-.3.21-.56.08-.26-.14-1.1-.4-2.1-1.3-.77-.7-1.3-1.55-1.45-1.81-.15-.26 0-.4.12-.53l.4-.47c.13-.15.17-.26.26-.43.09-.18.04-.33-.02-.46l-.86-2.09c-.2-.5-.43-.43-.6-.44H8.6Z"/></svg>
+       <span>WhatsApp</span></a>`);
+
   // ---------- helpers ----------
   const stars = (n) => `<span class="stars" aria-label="${n} de 5">${"★".repeat(n)}${"☆".repeat(5 - n)}</span>`;
   const reviewsHTML = () => D.reviews.map((r) =>
