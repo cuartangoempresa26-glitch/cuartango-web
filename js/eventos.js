@@ -7,7 +7,8 @@
   const min = new Date(); min.setDate(min.getDate() + 1); $("#e-date").min = min.toISOString().slice(0, 10);
   // "Festejar en ..." buttons preselect the venue
   document.querySelectorAll("[data-pick]").forEach((a) => a.addEventListener("click", () => { $("#e-place").value = a.dataset.pick; }));
-  const q = new URLSearchParams(location.search).get("local"); if (q && $("#e-place").querySelector(`[value="${q}"]`)) $("#e-place").value = q;
+  const qp = new URLSearchParams(location.search), g = Number(qp.get("personas")); if (g > 0 && $("#e-guests")) $("#e-guests").value = g;
+  const q = qp.get("local"); if (q && $("#e-place").querySelector(`[value="${q}"]`)) $("#e-place").value = q;
 
   f.addEventListener("submit", async (e) => {
     e.preventDefault();

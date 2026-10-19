@@ -10,7 +10,7 @@
 <!--/seo-->
 </head>
 <body data-page="reservas"><main><section><div class="wrap" style="max-width:640px"><h1>Reservar mesa en Cuartango Argentina</h1>
-<p class="muted">Elige local, fecha y número de personas, y reserva al instante. Para grupos de más de 10 personas, <a href="catering.html#consulta">escríbenos por el formulario</a>.</p>
+<p class="muted">Elige local, fecha y número de personas, y reserva al instante. Para grupos de más de 10 personas, <a href="eventos.html#evento">usa el formulario de grupos y celebraciones</a>.</p>
 <form id="book-form" class="card">
   <label for="b-venue">Local</label><select id="b-venue"><option value="las-palmas">Local Las Palmas</option><option value="vecindario" disabled>Nuevo Local Vecindario (próximamente)</option></select>
   <label for="b-date">Fecha</label><input id="b-date" type="date" required>
@@ -25,5 +25,5 @@
   <label class="check"><input type="checkbox" id="b-consent" required> He leído y acepto la <a href="privacidad.html">política de privacidad</a> y que Cuartango use mis datos para gestionar esta reserva.</label>
   <p><button id="b-submit" class="btn" disabled>Confirmar reserva</button></p>
 </form><div id="b-result"></div></div></section></main>
-<script>for(let i=1;i<=10;i++)document.getElementById('b-party').add(new Option(i+(i>1?' personas':' persona'),i));</script>
+<script>for(let i=1;i<=10;i++)document.getElementById('b-party').add(new Option(i+(i>1?' personas':' persona'),i));document.getElementById('b-party').add(new Option('Más de 10 personas (grupos)','grupo'));</script>
 <script src="js/app.js"></script><script src="js/booking.js"></script></body></html>

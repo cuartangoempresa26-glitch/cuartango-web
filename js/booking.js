@@ -36,8 +36,14 @@
     else say(demo ? "<strong>Modo demostración:</strong> la disponibilidad es simulada y la reserva no se guarda." : "", demo ? "demo" : "");
   };
 
+  // more than 10 people is not booked online: it goes to the groups & celebrations form (eventos)
+  const groupLink = () => `eventos.html?local=${encodeURIComponent(venueSel.value)}#evento`;
   async function refresh() {
     const mine = ++seq;
+    if (partyIn.value === "grupo") {
+      chosen = ""; submit.disabled = true; result.innerHTML = ""; slotsEl.innerHTML = "";
+      return say(`Para grupos de más de 10 personas preparamos la mesa a medida. Cuéntanos el día, la hora y cuántos sois en el formulario de grupos y celebraciones y te respondemos con una propuesta.<br><a class="btn" style="margin-top:12px" href="${groupLink()}">Ir al formulario de grupos</a>`, "warn");
+    }
     chosen = ""; submit.disabled = true; slotsEl.innerHTML = '<span class="muted">Consultando disponibilidad…</span>'; result.innerHTML = "";
     const q = new URLSearchParams({ venue: venueSel.value, date: dateIn.value, party: partyIn.value });
     try {
@@ -51,7 +57,7 @@
       }
       demo = false;
       const j = await r.json();
-      if (!r.ok) { slotsEl.innerHTML = ""; return say("Revisa la fecha y el número de personas (hasta 10 personas; para grupos mayores usa el formulario de catering o escríbenos).", "warn"); }
+      if (!r.ok) { slotsEl.innerHTML = ""; return say("Revisa la fecha y el número de personas (hasta 10 personas; para grupos mayores usa el <a href='eventos.html#evento'>formulario de grupos y celebraciones</a>).", "warn"); }
       if (j.enabled === false) { slotsEl.innerHTML = ""; return say(`Las reservas online de este local abrirán pronto. Escríbenos a <a href="mailto:${D.email}">${D.email}</a>.`, "warn"); }
       if (j.closed) { slotsEl.innerHTML = ""; return say("Cerrado este día. Elige otra fecha.", "warn"); }
       draw(j.slots);
