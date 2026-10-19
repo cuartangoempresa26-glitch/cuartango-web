@@ -34,8 +34,7 @@
        <div><h3>Vecindario</h3><p>${esc(D.venues.vecindario.address)}<br><a href="vecindario.html">Milanesas y entrepanes en Vecindario</a></p>
          <p><a href="mailto:${D.email}">${D.email}</a></p></div>
      </div>
-     <div class="wrap muted" style="margin-top:24px;font-size:.85rem">© ${new Date().getFullYear()} Cuartango Argentina · <a href="aviso-legal.html">Aviso legal</a> · <a href="privacidad.html">Privacidad</a> · <a href="cookies.html">Cookies</a></div></footer>
-     <div class="mobilebar"><a href="tel:${lp.phone.replace(/\s/g, "")}">Llamar</a><a href="${lp.maps}" target="_blank" rel="noopener">Cómo llegar</a></div>`);
+     <div class="wrap muted" style="margin-top:24px;font-size:.85rem">© ${new Date().getFullYear()} Cuartango Argentina · <a href="aviso-legal.html">Aviso legal</a> · <a href="privacidad.html">Privacidad</a> · <a href="cookies.html">Cookies</a></div></footer>`);
 
   // ---------- floating WhatsApp button (discreet; opens only when tapped) ----------
   const wa = "https://wa.me/34656441966?text=" + encodeURIComponent("Hola, accedí a la web de Cuartango y quiero reservar");

@@ -514,3 +514,7 @@ nav.main{margin-left:auto}
 @media(max-width:860px){.wa{bottom:68px;right:12px;height:44px;min-width:44px;padding:0 11px}.wa:hover span{max-width:0;margin:0}.wa:hover{padding-right:11px}}
 @media(prefers-reduced-motion:reduce){.wa{animation:none;opacity:1;transform:none}.wa span{transition:none}}
 @media print{.wa{display:none}}
+
+/* bottom call/maps bar removed on phones: WhatsApp button covers contact, each local page has its own map */
+.mobilebar{display:none!important}
+@media(max-width:860px){body{padding-bottom:0}.wa{bottom:18px}}
