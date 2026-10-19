@@ -9,6 +9,8 @@ const notAllowed = (allow) => new Response("Method Not Allowed", { status: 405, 
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+    // http -> https (one canonical, secure address for search engines)
+    if (url.protocol === "http:") { url.protocol = "https:"; return Response.redirect(url.toString(), 301); }
     // www.cuartango.com -> cuartango.com (keeps path and query)
     if (url.hostname.startsWith("www.")) {
       url.hostname = url.hostname.slice(4);
@@ -31,7 +33,10 @@ export default {
       case "/api/book": return m === "POST" ? handleBook(request, env) : notAllowed("POST");
       case "/api/cancel": return m === "POST" ? handleCancel(request, env) : notAllowed("POST");
     }
-    return env.ASSETS.fetch(request);
+    const res = await env.ASSETS.fetch(request);
+    // photos and videos rarely change: let browsers and Cloudflare keep them for a week (faster repeat visits)
+    if (/^\/img\//.test(url.pathname) && res.ok) { const h = new Headers(res.headers); h.set("Cache-Control", "public, max-age=604800"); return new Response(res.body, { status: res.status, statusText: res.statusText, headers: h }); }
+    return res;
   },
 
   // hourly cron (see wrangler.jsonc): reminder e-mails for tomorrow's bookings
