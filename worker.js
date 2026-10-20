@@ -29,6 +29,8 @@ export default {
       if (url.pathname === "/robots.txt") return env.ASSETS.fetch(new Request(new URL("/catering-robots.txt", url), request));
       if (!/^\/(img|css|js)\//.test(url.pathname) && url.pathname !== "/api/catering") return Response.redirect("https://catering.cuartango.com/", 301);
     }
+    // "Nosotros" moved to the catering subdomain (section "Nuestra cocina")
+    if (/^\/nosotros(\.html)?\/?$/.test(url.pathname) && url.hostname === "cuartango.com") return Response.redirect("https://catering.cuartango.com/#nuestra-cocina", 301);
     // the landing page lives on the subdomain only (one canonical address)
     if (/^\/catering-evento(\.html)?\/?$/.test(url.pathname)) return Response.redirect("https://catering.cuartango.com/", 301);
     // QR codes printed in the venues point here, so the destination can change without reprinting.

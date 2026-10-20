@@ -164,9 +164,6 @@ const pages = {
   'catering.html': { path: '/catering', name: 'Catering', title: 'Catering argentino en Gran Canaria | ' + BRAND,
     desc: `Catering argentino personalizado con parrillero y parrilla in situ en Gran Canaria: bodas, cumpleaños y eventos. Menús desde ${cheapest} € por persona.`,
     img: 'img/media/costillar-cruz.jpg', faq: faqCatering, ld: [organization, cateringService] },
-  'nosotros.html': { path: '/nosotros', name: 'Nosotros', title: 'Nuestra cocina | ' + BRAND,
-    desc: 'Fuego, brasa y tradición argentina: así cocinamos en ' + BRAND + '. Parrilleros expertos, carne cortada a cuchillo y presentación cuidada, en Gran Canaria.',
-    img: 'img/media/costillar-cruz.jpg', faq: faqNosotros, ld: [organization, { '@type': 'AboutPage', '@id': SITE + '/nosotros#about', url: SITE + '/nosotros', name: 'Nuestra cocina', isPartOf: { '@id': SITE + '/#website' }, about: { '@id': SITE + '/#org' }, inLanguage: 'es-ES' }] },
   'eventos.html': { path: '/eventos', name: 'Eventos', title: 'Festeja tu evento en nuestros locales | ' + BRAND,
     desc: 'Arma tu cumpleaños, reunión o celebración en Cuartango Argentina, en Las Palmas (Gran Canaria), y pronto en Vecindario. Cuéntanos tu evento y te preparamos una propuesta.',
     img: 'img/media/mesa-banquete.jpg', faq: faqEventos, ld: [organization, eventService] },
@@ -212,6 +209,7 @@ for (const [file, p] of Object.entries(pages)) {
     ...faqCatering.map(([q, a]) => [q, a.replace('<a href="#consulta">', '<a href="#consulta">')]),
     ['¿Se puede personalizar el menú?', 'Sí. Tienes tres menús (' + C.menus.map((m) => m.name).join(', ') + ') y complementos como canapés, tabla de quesos, mesas dulces, alcohol argentino, vajilla y menaje o barra libre. Cuéntanos tu evento, tus invitados y cualquier alergia o necesidad y lo estudiamos contigo para prepararte una propuesta a medida.'],
     ['¿Qué carne utilizáis?', 'Ternera de primer nivel (entraña, vacío a la salmuera, costillar y costillas), chorizo argentino y muslos de pollo marinados, cocinados con leña y brasa por parrilleros expertos y cortados a cuchillo en el momento.'],
+    ...faqNosotros.slice(0, 2),
     ['¿Dónde hacéis el catering?', 'En Gran Canaria: llevamos la parrilla al lugar de tu evento y la montamos allí mismo.']
   ];
   const service = clean({ '@type': 'Service', '@id': SUB + '/#service', url: SUB + '/', serviceType: 'Catering argentino con parrillero (show cook)', name: 'Catering argentino ' + BRAND,
@@ -260,7 +258,7 @@ fs.writeFileSync(path.join(root, 'llms.txt'), `# ${BRAND}
 - Carta con precios: ${SITE}/menu
 - Celebraciones y eventos en nuestros locales (cumpleaños, reuniones, cenas de empresa): ${SITE}/eventos
 - Catering argentino con parrillero (menús desde ${cheapest} € por persona, mínimo 25 comensales): ${SITE}/catering
-- Nuestra cocina (fuego, brasa y tradición): ${SITE}/nosotros
+- Catering en su propia web, con "nuestra cocina" (fuego, brasa y tradición): https://catering.cuartango.com/
 - Contacto: ${D.email}
 `);
 console.log('SEO regenerated for', Object.keys(pages).length, 'pages; llms.txt, sitemap and robots written');

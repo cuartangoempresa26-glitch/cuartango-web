@@ -8,7 +8,7 @@
   const links = [
     ["menu.html", "Carta", "menu"],
     ["las-palmas.html", "Las Palmas", "las-palmas"], ["vecindario.html", "Vecindario", "vecindario"],
-    ["eventos.html", "Eventos", "eventos"], ["catering.html", "Catering", "catering"], ["nosotros.html", "Nosotros", "nosotros"]
+    ["eventos.html", "Eventos", "eventos"], ["catering.html", "Catering", "catering"]
   ];
   const nav = links.map(([h, t, k]) => `<a href="${h}"${k === page ? ' aria-current="page"' : ""}>${t}</a>`).join("");
   document.body.insertAdjacentHTML("afterbegin",
