@@ -78,7 +78,6 @@
         vid("p-ensalada-final", "Ensalada con queso y aderezo", "El último toque"),
         vid("p-empanadas", "Empanadas recién hechas sobre la tabla", "Recién salidas"),
         img("parrilla-montaje", "3/4", "Parrillero de Cuartango con las parrillas montadas en el lugar del evento", "Las parrillas, listas"),
-        img("mesa-banquete", "3/4", "Mesa de banquete con vajilla y flores", "La mesa del banquete"),
         vid("p-fuego-noche", "Costillar a la cruz al atardecer, con luces", "El fuego, al atardecer"),
         img("pimientos-rellenos", "3/4", "Pimientos rellenos de queso y huevo y muslos de pollo en la parrilla", "Pimientos rellenos y pollo"),
         img("mesa-menu", "3/4", "Plato con servilleta y menú impreso", "El menú en la mesa"),

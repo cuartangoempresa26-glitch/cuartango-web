@@ -166,7 +166,7 @@ const pages = {
     img: 'img/media/costillar-cruz.jpg', faq: faqCatering, ld: [organization, cateringService] },
   'eventos.html': { path: '/eventos', name: 'Eventos', title: 'Festeja tu evento en nuestros locales | ' + BRAND,
     desc: 'Arma tu cumpleaños, reunión o celebración en Cuartango Argentina, en Las Palmas (Gran Canaria), y pronto en Vecindario. Cuéntanos tu evento y te preparamos una propuesta.',
-    img: 'img/media/mesa-banquete.jpg', faq: faqEventos, ld: [organization, eventService] },
+    img: 'img/las-palmas-sirviendo.jpg', faq: faqEventos, ld: [organization, eventService] },
   'reservas.html': { path: '/reservas', name: 'Reservas', title: 'Reservar mesa | ' + BRAND,
     desc: 'Reserva tu mesa online en ' + BRAND + ' Las Palmas. El local de Vecindario abrirá próximamente. Confirmación por correo.',
     img: 'img/las-palmas-sirviendo.jpg', ld: [organization] }
