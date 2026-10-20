@@ -203,6 +203,41 @@ for (const [file, p] of Object.entries(pages)) {
   fs.writeFileSync(f, h);
 }
 
+// ---------- catering subdomain (catering.cuartango.com): its own landing page, sitemap and robots ----------
+{
+  const SUB = 'https://catering.cuartango.com';
+  const title = 'Catering argentino con parrillero en Gran Canaria | Cuartango Catering';
+  const desc = `Catering argentino con parrillero y parrilla in situ en Gran Canaria para bodas, cumpleaños y eventos de empresa. Menús a medida desde ${cheapest} € por persona.`;
+  const faqSub = [
+    ...faqCatering.map(([q, a]) => [q, a.replace('<a href="#consulta">', '<a href="#consulta">')]),
+    ['¿Se puede personalizar el menú?', 'Sí. Tienes tres menús (' + C.menus.map((m) => m.name).join(', ') + ') y complementos como canapés, tabla de quesos, mesas dulces, alcohol argentino, vajilla y menaje o barra libre. Cuéntanos tu evento, tus invitados y cualquier alergia o necesidad y lo estudiamos contigo para prepararte una propuesta a medida.'],
+    ['¿Qué carne utilizáis?', 'Ternera de primer nivel (entraña, vacío a la salmuera, costillar y costillas), chorizo argentino y muslos de pollo marinados, cocinados con leña y brasa por parrilleros expertos y cortados a cuchillo en el momento.'],
+    ['¿Dónde hacéis el catering?', 'En Gran Canaria: llevamos la parrilla al lugar de tu evento y la montamos allí mismo.']
+  ];
+  const service = clean({ '@type': 'Service', '@id': SUB + '/#service', url: SUB + '/', serviceType: 'Catering argentino con parrillero (show cook)', name: 'Catering argentino ' + BRAND,
+    provider: { '@id': SITE + '/#org' }, areaServed: { '@type': 'AdministrativeArea', name: 'Gran Canaria' }, description: C.intro,
+    offers: C.menus.map((m) => ({ '@type': 'Offer', name: m.name, priceCurrency: 'EUR', priceSpecification: { '@type': 'UnitPriceSpecification', price: m.price, priceCurrency: 'EUR', unitText: 'por persona' } })) });
+  const ld = [organization, service,
+    { '@type': 'WebPage', '@id': SUB + '/#page', url: SUB + '/', name: title, inLanguage: 'es-ES', isPartOf: { '@id': SITE + '/#website' }, about: { '@id': SUB + '/#service' } },
+    { '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Inicio', item: SITE + '/' }, { '@type': 'ListItem', position: 2, name: 'Catering', item: SITE + '/catering' }, { '@type': 'ListItem', position: 3, name: 'Catering argentino con parrillero', item: SUB + '/' }] },
+    { '@type': 'FAQPage', mainEntity: faqSub.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: strip(a) } })) }];
+  const img = SITE + '/img/media/costillar-cruz.jpg';
+  const tags = [`<link rel="canonical" href="${SUB}/">`,
+    `<meta property="og:type" content="website"><meta property="og:locale" content="es_ES"><meta property="og:site_name" content="${BRAND} · Catering">`,
+    `<meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:url" content="${SUB}/"><meta property="og:image" content="${img}">`,
+    `<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${esc(title)}"><meta name="twitter:description" content="${esc(desc)}"><meta name="twitter:image" content="${img}">`,
+    `<script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@graph': ld.map(clean) })}</script>`].join('\n');
+  const f = path.join(root, 'catering-evento.html');
+  let h = fs.readFileSync(f, 'utf8');
+  h = h.replace(/<title>[^<]*<\/title>/, `<title>${esc(title)}</title>`).replace(/<meta name="description" content="[^"]*">/, `<meta name="description" content="${esc(desc)}">`);
+  h = h.replace(new RegExp(start + '[^]*?' + end), `${start}\n${tags}\n${end}`);
+  const faqHtml = `<section class="seo-section"><div class="wrap" style="max-width:820px"><span class="eyebrow">Preguntas frecuentes</span><h2>Todo lo que necesitas saber</h2>${faqSub.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${a}</p></details>`).join('')}<p style="margin-top:28px">¿Prefieres comer en nuestro restaurante? <a href="https://cuartango.com/las-palmas">Conoce el local de Las Palmas</a> o <a href="https://cuartango.com/reservas">reserva mesa</a>.</p></div></section>`;
+  h = h.replace(new RegExp(cs + '[^]*?' + ce), `${cs}${faqHtml}${ce}`);
+  fs.writeFileSync(f, h);
+  fs.writeFileSync(path.join(root, 'catering-sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url><loc>${SUB}/</loc><lastmod>${new Date().toISOString().slice(0, 10)}</lastmod></url>\n</urlset>\n`);
+  fs.writeFileSync(path.join(root, 'catering-robots.txt'), `User-agent: *\nAllow: /\nDisallow: /api/\n\nSitemap: ${SUB}/sitemap.xml\n`);
+}
+
 // ---------- sitemap, robots, llms.txt ----------
 const today = new Date().toISOString().slice(0, 10);
 fs.writeFileSync(path.join(root, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${Object.values(pages).map((p) => `  <url><loc>${SITE}${p.path}</loc><lastmod>${today}</lastmod></url>`).join('\n')}\n</urlset>\n`);
