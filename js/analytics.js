@@ -20,6 +20,8 @@
     window.ctTrack = (name, params) => gtag("event", name, params || {});
     // automatic click events
     document.addEventListener("click", (e) => {
+      const t = e.target.closest && e.target.closest("[data-track]");
+      if (t) ctTrack(t.dataset.track, { boton: t.dataset.btn || (t.innerText || "").trim().slice(0, 40), page: location.hostname + location.pathname });
       const a = e.target.closest && e.target.closest("a[href]"); if (!a) return;
       const h = a.getAttribute("href") || "";
       if (/wa\.me|whatsapp/i.test(h)) ctTrack("whatsapp_click", { page: location.pathname });

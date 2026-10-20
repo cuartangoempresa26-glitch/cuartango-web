@@ -19,7 +19,7 @@ export default {
     // argentina.cuartango.com = link-in-bio page (bio.html); its images/css live in the same assets, everything else belongs to the main site
     if (url.hostname === "argentina.cuartango.com") {
       if (url.pathname === "/") return env.ASSETS.fetch(new Request(new URL("/bio", url), request));
-      if (/^\/(img|css)\//.test(url.pathname)) return env.ASSETS.fetch(request);
+      if (/^\/(img|css|js)\//.test(url.pathname)) return env.ASSETS.fetch(request);
       return Response.redirect("https://cuartango.com" + url.pathname + url.search, 302);
     }
     // catering.cuartango.com = dedicated catering landing page (catering-evento.html) with its own sitemap and robots; indexable on its own
