@@ -40,6 +40,7 @@
       const r = await fetch(cfg.cateringEndpoint, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
       const j = await r.json().catch(() => ({}));
       if (!r.ok) throw new Error(j.error || "Error");
+      window.ctTrack && ctTrack("generate_lead", { tipo: "catering" });
       f.reset(); warn.textContent = "";
       res.innerHTML = `<div class="ok"><strong>¡Gracias, ${esc(payload.name)}!</strong><br>Hemos recibido tu consulta y te responderemos pronto a ${esc(payload.email)}.${j.demo ? '<br><span class="muted">(Modo de prueba: el correo real se activará al publicar la web.)</span>' : ""}</div>`;
     } catch (err) {

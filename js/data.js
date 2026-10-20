@@ -3,6 +3,7 @@
 window.CUARTANGO = {
   timezone: "Atlantic/Canary",
   lastSeatingMinutesBeforeClose: 60, // assumption, confirm with the client
+  ga4MeasurementId: "", // Google Analytics 4 ID (G-XXXXXXXXXX). While empty: no analytics, no cookie banner.
   email: "info@cuartango.com",
   phone: "+34 656 441 966",
   slogan: "Donde la carne es un arte y el fuego, tradición",

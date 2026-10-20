@@ -89,6 +89,7 @@
       const r = await fetch("/api/book", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
       const j = await r.json().catch(() => ({}));
       if (r.ok && j.ok) {
+        window.ctTrack && ctTrack("reserva_confirmada", { local: j.venue, personas: j.party });
         form.reset(); dateIn.value = iso(today); slotsEl.innerHTML = ""; say("");
         result.innerHTML = `<div class="ok"><strong>¡Reserva confirmada!</strong><br>${esc(j.venue)} · ${esc(j.when)} · ${esc(j.party)} personas<br>${j.emailed ? "Te hemos enviado la confirmación por correo (revisa también la carpeta de spam)." : "Guarda estos datos; si necesitas cambiar algo, escríbenos a " + esc(D.email) + "."}</div>`;
       } else if (j.error === "slot_unavailable") {

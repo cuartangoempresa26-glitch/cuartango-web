@@ -21,6 +21,7 @@
       const r = await fetch(cfg.cateringEndpoint, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
       const j = await r.json().catch(() => ({}));
       if (!r.ok) throw new Error(j.error || "Error");
+      window.ctTrack && ctTrack("generate_lead", { tipo: "evento_en_local" });
       f.reset();
       res.innerHTML = `<div class="ok"><strong>¡Gracias, ${esc(payload.name)}!</strong><br>Hemos recibido tu consulta y te responderemos pronto a ${esc(payload.email)}.</div>`;
     } catch (err) {
