@@ -481,8 +481,10 @@ nav.main{margin-left:auto}
 
 /* hero text a bit lighter on media heroes of inner pages */
 .hero.has-video .wrap.hero-in h1{text-shadow:0 2px 24px rgba(0,0,0,.35)}
-.menu-card .menu-photo{margin:-30px -30px 18px;aspect-ratio:16/10;overflow:hidden;background:var(--walnut)}
-.menu-card .menu-photo img{width:100%;height:100%;object-fit:cover}
+.menu-card .menu-mark{margin:-30px -30px 18px;background:#000200;text-align:center;padding:10px 0 20px;border-bottom:3px solid var(--brass)}
+.menu-card .menu-mark img{width:68%;max-width:260px;margin:0 auto;display:block}
+.menu-card .menu-mark span{display:block;margin-top:-6px;font:500 1.55rem/1.1 var(--display);letter-spacing:.16em;text-transform:uppercase;color:#e9c46a}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .story-steps{grid-column:1;grid-row:1}
 .story-stage{grid-column:2;grid-row:1}
 @media(max-width:860px){.story-steps{grid-column:1}}
