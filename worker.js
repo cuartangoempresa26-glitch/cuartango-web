@@ -4,6 +4,8 @@ import { onRequestPost as catering } from "./functions/api/catering.js";
 import { handleReviews } from "./functions/api/reviews.js";
 import { handleAvailability, handleBook, handleCancel, sendReminders } from "./functions/api/booking.js";
 
+import { sendNotices } from "./functions/lib/notices.js";
+
 const notAllowed = (allow) => new Response("Method Not Allowed", { status: 405, headers: { Allow: allow } });
 
 export default {
@@ -53,5 +55,6 @@ export default {
   // hourly cron (see wrangler.jsonc): reminder e-mails for tomorrow's bookings
   async scheduled(event, env, ctx) {
     ctx.waitUntil(sendReminders(env));
+    ctx.waitUntil(sendNotices(env));
   }
 };
