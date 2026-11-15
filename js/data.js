@@ -287,7 +287,7 @@ window.CUARTANGO = {
             },
             {
               "name": "Morcilla",
-              "price": "3,50 €",
+              "price": "5,00 €",
               "desc": "Embutido suave y cremoso con nuestra salsa cuartonesa."
             },
             {
