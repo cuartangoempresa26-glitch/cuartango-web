@@ -58,7 +58,7 @@ const restaurant = (key, slugPath, extra = {}) => {
   const lp = key === 'las-palmas';
   return clean({
     '@type': 'Restaurant', '@id': SITE + slugPath + '#restaurant', name: BRAND + ' · ' + (lp ? 'Las Palmas' : 'Vecindario'),
-    alternateName: lp ? ['Cuartango Entrepanes Las Palmas', 'Cuartango Las Palmas'] : ['Cuartango Entrepanes Vecindario', 'Cuartango Vecindario'],
+    alternateName: lp ? ['Cuartango Entrepanes Las Palmas', 'Cuartango Las Palmas'] : ['Cuartango Milanesería', 'Cuartango Milanesería Vecindario', 'Cuartango Vecindario'],
     url: SITE + slugPath, parentOrganization: { '@id': SITE + '/#org' },
     description: lp ? 'Parrilla argentina en Las Palmas de Gran Canaria: parrillada, entraña, vacío, empanadas, milanesas y entrepanes. Con terraza exterior.'
       : 'Próxima apertura. Milanesas argentinas, entrepanes artesanos y sándwich de vacío al disco en Vecindario, Gran Canaria.',
