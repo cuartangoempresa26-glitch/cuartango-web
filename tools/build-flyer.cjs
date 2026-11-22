@@ -16,6 +16,7 @@ const hoursLines = (hours) => {
 (async () => {
   const qCat = await qr("https://catering.cuartango.com/?utm_source=flyer&utm_medium=qr&utm_campaign=catering");
   const qIg = await qr("https://www.instagram.com/cuartango_argentina/");
+  const qWeb = await qr("https://cuartango.com/?utm_source=flyer&utm_medium=qr&utm_campaign=web");
   const logoLP = "../../img/logo-menu.jpg", logoVC = "../../img/logo-milaneseria.png";
   const html = `<!doctype html><html lang="es"><head><meta charset="utf-8"><title>Flyer Cuartango (13x18 cm, doble cara)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap">
@@ -41,10 +42,11 @@ h1{font:700 26pt/1.02 "Cormorant Garamond",Georgia,serif;text-align:center;color
 .price{display:inline-block;margin-top:1.6mm;font:700 9pt Inter;color:#000200;background:#e9c46a;border-radius:1.5mm;padding:.8mm 2.4mm}
 .brands{display:flex;gap:3mm;margin-top:2.4mm;align-items:center}.bd{display:inline-flex;align-items:center;justify-content:center;height:7.2mm;padding:0 3.6mm;border-radius:3.6mm;font:800 10.5pt/1 Inter,Arial,sans-serif;letter-spacing:-.01em}
 .bd.uber{background:#000;border:.35mm solid #fff;color:#fff}.bd.uber i{font-style:normal;color:#06c167;margin-left:1mm}
+.bd.loc{background:transparent;border:.35mm solid #e9c46a;color:#e9c46a;font-size:9.6pt}
 .bd.glovo{background:#ffc244;color:#00a082;text-transform:lowercase;letter-spacing:0}
-.qrbar{display:flex;justify-content:center;gap:11mm;margin-top:auto;padding:3mm 8mm 3mm;border-top:.4mm solid #b08d57}
+.qrbar{display:flex;justify-content:center;gap:6mm;margin-top:auto;padding:3mm 8mm 3mm;border-top:.4mm solid #b08d57}
 .q{text-align:center}
-.qi{width:28mm;height:28mm;background:#fff;padding:2mm;border-radius:2mm;margin:0 auto 1.6mm}.qi svg{width:100%;height:100%;display:block}
+.qi{width:26mm;height:26mm;background:#fff;padding:2mm;border-radius:2mm;margin:0 auto 1.6mm}.qi svg{width:100%;height:100%;display:block}
 .q b{display:block;font:800 8.5pt Inter;letter-spacing:.1em;text-transform:uppercase;color:#e9c46a}
 .q span{display:block;font:400 7.4pt Inter;color:#f6efe4;margin-top:.5mm}
 .flag{display:grid;grid-template-columns:repeat(3,1fr);height:3mm;flex:none}.flag i{background:#3b8ee8}.flag i:nth-child(2){background:#fff}
@@ -71,13 +73,14 @@ h1{font:700 26pt/1.02 "Cormorant Garamond",Georgia,serif;text-align:center;color
   <div class="logos"><img src="${logoLP}" alt="Cuartango"><div class="sep"></div><img src="${logoVC}" alt="Cuartango Milanesería"></div>
   <div class="kick">Cocina argentina · Gran Canaria</div>
   <h1>Llevamos el sabor de Argentina<br>a tu mesa</h1>
-  <div class="sub">Catering, para llevar y a domicilio: elige cómo disfrutarlo.</div>
+  <div class="sub">Catering, take away o en nuestros locales: elige cómo disfrutarlo.</div>
   <div class="cards">
     <div class="card hl"><h2>Catering a domicilio</h2><p><b>Cumpleaños y celebraciones especiales.</b> También bodas, reuniones y eventos de empresa. Llevamos la parrilla y al parrillero a tu evento, con un menú pensado a tu medida.</p><span class="price">Desde 40 € por persona · mínimo 25 comensales</span></div>
-    <div class="card"><h2>Take away en nuestros locales</h2><p>Pide para llevar en cualquiera de los dos locales, en horario de atención: <b>milanesas, entrepanes, empanadas</b> y más, listos para disfrutar en casa o en la oficina.</p></div>
-    <div class="card"><h2>A domicilio con Uber Eats y Glovo</h2><p>Recibe nuestros platos donde estés, rápido y calentitos, desde las plataformas de reparto.</p><div class="brands"><span class="bd uber">Uber<i>Eats</i></span><span class="bd glovo">Glovo</span></div></div>
+    <div class="card"><h2>Take away con Uber Eats o Glovo</h2><p>Pide tus platos favoritos y recíbelos donde estés, rápido y calentitos.</p><div class="brands"><span class="bd uber">Uber<i>Eats</i></span><span class="bd glovo">Glovo</span></div></div>
+    <div class="card"><h2>Comida en el local</h2><p>Disfruta en nuestra mesa: <b>parrilla, milanesas y entrepanes</b> en el local que te quede mejor.</p><div class="brands"><span class="bd loc">Las Palmas</span><span class="bd loc">Vecindario</span></div></div>
   </div>
   <div class="qrbar">
+    <div class="q"><div class="qi">${qWeb}</div><b>Nuestra web</b><span>Carta y reservas</span></div>
     <div class="q"><div class="qi">${qCat}</div><b>Catering</b><span>Menús y presupuesto</span></div>
     <div class="q"><div class="qi">${qIg}</div><b>Instagram</b><span>@cuartango_argentina</span></div>
   </div>
@@ -91,7 +94,7 @@ h1{font:700 26pt/1.02 "Cormorant Garamond",Georgia,serif;text-align:center;color
     <div class="v"><h3>Cuartango Milanesería</h3><div class="tag">Vecindario · milanesas, entrepanes y sándwich de vacío al disco</div>
       <div class="ad">${VC.address}</div><div class="ph">${VC.phone}</div><div class="hr">${hoursLines(VC.hours).join("<br>")}</div></div>
   </div>
-  <div class="how"><div><b>Catering</b><span>Escanea el QR del frente y pide tu presupuesto</span></div><div><b>Para llevar</b><span>Llama o pasa por cualquiera de los locales</span></div><div><b>Reparto</b><span>Uber Eats y Glovo, a tu puerta</span></div></div>
+  <div class="how"><div><b>Catering</b><span>Escanea el QR del frente y pide tu presupuesto</span></div><div><b>Take away</b><span>Pide con Uber Eats o Glovo</span></div><div><b>En el local</b><span>Reserva en cuartango.com o llama</span></div></div>
   <div class="cta"><b>cuartango.com</b> · Reserva online, carta y catering</div>
   <div class="flag"><i></i><i></i><i></i></div>
 </div>
