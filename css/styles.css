@@ -521,6 +521,11 @@ nav.main{margin-left:auto}
 .mobilebar{display:none!important}
 @media(max-width:860px){body{padding-bottom:0}.wa{bottom:18px}}
 
-/* Vecindario: photo banner under the header (top half of the venue photo; the neon sign stays visible) */
-.vc-photo{background:#2b1d17;padding:0}
-.vc-photo img{display:block;width:100%;max-width:1280px;margin:0 auto;height:auto;max-height:460px;object-fit:cover;object-position:center 20%}
+/* Vecindario: photo hero, same layout as the Las Palmas cover (photo behind the title; the neon sign stays in the upper part) */
+.hero.has-photo{background:#2b1d17 url(../img/vecindario-local.jpg) 32% 22%/cover no-repeat;min-height:min(86vh,720px);display:flex;align-items:flex-end;padding:96px 0 56px;color:#f6efe4}
+.hero.has-photo:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(28,19,15,.05) 0%,rgba(28,19,15,.18) 38%,rgba(28,19,15,.78) 100%)}
+.hero.has-photo .wrap{position:relative;z-index:2;width:100%}
+.hero.has-photo h1{color:#fff;text-shadow:0 2px 18px rgba(0,0,0,.45)}
+.hero.has-photo p.slogan{color:#f6efe4;text-shadow:0 1px 12px rgba(0,0,0,.5)}
+.hero.has-photo .btn.ghost{color:#f6efe4;border-color:#f6efe4}
+.hero.has-photo .btn.ghost:hover{background:#f6efe4;color:var(--walnut)}
