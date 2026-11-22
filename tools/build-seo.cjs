@@ -67,7 +67,7 @@ const restaurant = (key, slugPath, extra = {}) => {
     paymentAccepted: v.payments || undefined, openingHoursSpecification: v.comingSoon ? undefined : hoursSpec(v.hours), sameAs: [D.instagram, v.maps].filter(Boolean),
     areaServed: lp ? 'Las Palmas de Gran Canaria' : 'Vecindario, Gran Canaria',
     address: { '@type': 'PostalAddress', streetAddress: street.trim(), addressLocality: lp ? 'Las Palmas de Gran Canaria' : 'Vecindario',
-      postalCode: lp ? '35007' : undefined, addressRegion: 'Las Palmas', addressCountry: 'ES' },
+      postalCode: lp ? '35007' : '35110', addressRegion: 'Las Palmas', addressCountry: 'ES' },
     ...extra
   });
 };

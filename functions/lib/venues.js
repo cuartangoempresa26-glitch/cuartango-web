@@ -21,7 +21,7 @@ export const VENUES = {
   },
   "vecindario": {
     name: "Cuartango Milanesería Vecindario",
-    address: "C. Granada 22, Balos, Vecindario",
+    address: "C. Granada 22, 35110 Vecindario (Balos)",
     phone: "+34 699 081 213",
     calendarVar: "CALENDAR_ID_VECINDARIO",
     staffVar: "STAFF_EMAIL_VECINDARIO",
