@@ -24,16 +24,15 @@ window.CUARTANGO = {
       order: { glovo: null, uber: null } // paste the venue links here; buttons appear automatically
     },
     "vecindario": {
-      name: "Nuevo Local Vecindario",
-      comingSoon: true, // todavía no ha abierto: muestra "Próximamente" y no admite reservas. Quitar esta línea (aquí y en functions/lib/venues.js) al abrir.
+      name: "Cuartango Milanesería Vecindario",
       city: "Vecindario (Santa Lucía de Tirajana)",
       address: "C. Granada 22, Balos, Vecindario", // postal code and exact municipality to confirm
       phone: null,   // TODO
       maps: "https://www.google.com/maps/search/?api=1&query=Calle+Granada+22+Balos+Vecindario",
       mapEmbed: "https://www.google.com/maps?q=Calle+Granada+22+Balos+Vecindario&output=embed",
-      // PROVISIONAL: same hours as Las Palmas until the client sends the real ones
-      hours: { 0: [["13:00","17:00"]], 1: [], 2: [["13:00","17:00"],["20:00","23:00"]], 3: [["13:00","17:00"],["20:00","23:00"]],
-               4: [["13:00","16:30"],["20:00","23:00"]], 5: [["13:00","16:30"],["20:00","23:00"]], 6: [["13:00","17:00"],["20:00","23:00"]] },
+      // Real hours given by the client (2026-11-22): Thursday to Monday 12:00-16:30 and 19:00-23:00; closed Tuesday and Wednesday.
+      hours: { 0: [["12:00","16:30"],["19:00","23:00"]], 1: [["12:00","16:30"],["19:00","23:00"]], 2: [], 3: [],
+               4: [["12:00","16:30"],["19:00","23:00"]], 5: [["12:00","16:30"],["19:00","23:00"]], 6: [["12:00","16:30"],["19:00","23:00"]] },
       services: ["Delivery", "Terraza exterior cubierta"], // TODO: completar el resto de servicios (este local no tiene parrilla)
       payments: "Visa, Mastercard, Amex, débito, efectivo, contactless, Apple Pay", // mismos medios de pago que Las Palmas (indicado por el cliente)
       order: { glovo: null, uber: null }
@@ -68,7 +67,7 @@ window.CUARTANGO = {
             },
             {
               "name": "Pimientos rellenos",
-              "price": "8,00 €",
+              "price": "8,50 €",
               "desc": "Pimientos asados rellenos de queso mozzarella y huevo de la granja, gratinados en nuestra parrilla."
             },
             {
@@ -83,7 +82,7 @@ window.CUARTANGO = {
             },
             {
               "name": "Provolone fugazzeta",
-              "price": "11,90 €",
+              "price": "12,10 €",
               "desc": "El clásico a la parrilla, con cebolla caramelizada."
             }
           ]
@@ -120,7 +119,7 @@ window.CUARTANGO = {
             },
             {
               "name": "Guarnición",
-              "price": "2,50 €",
+              "price": "2,90 €",
               "desc": "Papas fritas, ensalada o pimiento asado."
             }
           ]
@@ -153,17 +152,17 @@ window.CUARTANGO = {
           "items": [
             {
               "name": "Ensalada Sesarpo",
-              "price": "11,90 €",
+              "price": "12,50 €",
               "desc": "Cuartonesa, atún, lechuga romana, tomates cherry, pollo empanado y crutones."
             },
             {
               "name": "Ensalada Villera",
-              "price": "10,00 €",
+              "price": "10,90 €",
               "desc": "Lechuga romana, tomate de la huerta, huevo duro, atún, pasta y choclo."
             },
             {
               "name": "Ensalada Lacheta",
-              "price": "11,50 €",
+              "price": "11,90 €",
               "desc": "Lechuga romana, tomates cherry, cebolla, olivas negras, zanahoria y queso en cubos."
             }
           ]
@@ -171,23 +170,23 @@ window.CUARTANGO = {
         {
           "id": "parrilla",
           "title": "Parrilla",
-          "note": "Todos nuestros platos se sirven sin guarnición. Puedes añadir una guarnición aparte por solo 2,50 €.",
+          "note": "Todos nuestros platos se sirven sin guarnición. Puedes añadir una guarnición aparte por solo 2,90 €.",
           "items": [
             {
               "name": "Parrillada",
-              "price": "66,90 €",
+              "price": "67,90 €",
               "desc": "Chorizo argentino, entraña, vacío, tira de asado, pimientos asados rellenos, salsa criolla y chimichurri. Acompañada de ensalada, papas y pan.",
               "featured": true
             },
             {
               "name": "Parrillada premium",
-              "price": "86,90 €",
+              "price": "87,90 €",
               "desc": "La parrillada, con queso provolone, mollejas de ternera y morcilla. Acompañada de ensalada, papas y pan.",
               "featured": true
             },
             {
               "name": "Entraña de ternera",
-              "price": "17,50 €",
+              "price": "17,90 €",
               "desc": "Clásico corte argentino: fina, tierna y de sabor intenso, con nuestra salsa chimichurri.",
               "featured": true
             },
@@ -208,7 +207,7 @@ window.CUARTANGO = {
             },
             {
               "name": "Morcilla",
-              "price": "4,50 €",
+              "price": "5,50 €",
               "desc": "Embutido suave y cremoso hecho a la parrilla, con salsa cuartonesa."
             },
             {

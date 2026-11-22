@@ -21,7 +21,7 @@
     const m = D.menus[venue];
     $("#menu-note").innerHTML = (venue === "las-palmas"
       ? "Carta del Local Las Palmas, con parrilla."
-      : "Carta del Nuevo Local Vecindario, sin parrilla.") + ` <a href="${m.pdf}" target="_blank" rel="noopener">Descargar carta en PDF</a>`;
+      : "Carta de Cuartango Milanesería (Vecindario), sin parrilla.") + ` <a href="${m.pdf}" target="_blank" rel="noopener">Descargar carta en PDF</a>`;
   };
 
   const render = () => {

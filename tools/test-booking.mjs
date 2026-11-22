@@ -55,22 +55,18 @@ r = await (await get(`venue=las-palmas&date=${mon}&party=2`)).json();
 ok(r.closed === true && r.slots.length === 0, "Monday closed");
 r = await (await get(`venue=las-palmas&date=${fri}&party=2`)).json();
 ok(r.slots.some((s) => s.time === "13:00") && r.slots.some((s) => s.time === "22:00") && !r.slots.some((s) => s.time === "16:30" || s.time === "17:00"), "Friday: lunch (until 16:30) and dinner (20:00-23:00)");
-{ // Vecindario has not opened yet: no online bookings while venues.vecindario.comingSoon is true
+{ // Vecindario (Cuartango Milanesería) is open: Thursday to Monday 12:00-16:30 and 19:00-23:00, closed Tuesday and Wednesday, 44 seats
+  const thu = future(4);
   r = await (await get(`venue=vecindario&date=${tue}&party=2`)).json();
-  ok(r.enabled === false && r.reason === "proximamente", "Vecindario shows as coming soon (no slots)");
-  const before0 = events.length;
-  ok((await post(handleBook, { venue: "vecindario", date: tue, time: "13:00", party: 2, name: "Luis Gil", phone: "600 222 333", email: "luis@example.com", consent: true })).status === 409 && events.length === before0, "Vecindario booking refused while coming soon");
-}
-{ // once it opens (flag removed), bookings go to its own calendar and notify its own manager
-  VENUES.vecindario.comingSoon = false;
-  r = await (await get(`venue=vecindario&date=${tue}&party=2`)).json();
-  ok(r.enabled === true && r.slots.length === 7 + 5, "Vecindario bookable once open");
+  ok(r.closed === true && r.slots.length === 0, "Vecindario closed on Tuesday");
+  r = await (await get(`venue=vecindario&date=${thu}&party=2`)).json();
+  ok(r.enabled === true && r.slots.length === 8 + 7, "Vecindario Thursday: lunch 12:00-15:30 (8) + dinner 19:00-22:00 (7), got " + r.slots?.length);
+  ok(r.slots.some((s) => s.time === "12:00" && s.available) && r.slots.every((s) => s.time !== "16:30"), "Vecindario opens at 12:00 and has no slot in the last hour");
   const before = events.length;
-  const res = await post(handleBook, { venue: "vecindario", date: tue, time: "13:00", party: 2, name: "Luis Gil", phone: "600 222 333", email: "luis@example.com", consent: true });
+  const res = await post(handleBook, { venue: "vecindario", date: thu, time: "13:00", party: 2, name: "Luis Gil", phone: "600 222 333", email: "luis@example.com", consent: true });
   ok(res.status === 200 && events.length === before + 1 && events.at(-1).cal === env.CALENDAR_ID_VECINDARIO, "Vecindario booking stored in the Vecindario calendar");
   ok(mails.at(-1).to[0] === "vecindario@x.com", "Vecindario booking e-mails the Vecindario manager");
   events.pop(); mails.length = 0;
-  VENUES.vecindario.comingSoon = true;
 }
 ok((await get(`venue=las-palmas&date=${tue}&party=99`)).status === 400, "party too large rejected");
 ok((await get(`venue=nope&date=${tue}&party=2`)).status === 400, "unknown venue rejected");

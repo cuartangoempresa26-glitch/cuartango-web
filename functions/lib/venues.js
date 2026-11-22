@@ -20,15 +20,14 @@ export const VENUES = {
              4: [["13:00", "16:30"], ["20:00", "23:00"]], 5: [["13:00", "16:30"], ["20:00", "23:00"]], 6: [["13:00", "17:00"], ["20:00", "23:00"]] }
   },
   "vecindario": {
-    name: "Nuevo Local Vecindario",
-    comingSoon: true,  // not open yet: no online bookings. Remove (here and in js/data.js) on opening day.
+    name: "Cuartango Milanesería Vecindario",
     address: "C. Granada 22, Balos, Vecindario",
     phone: null,
     calendarVar: "CALENDAR_ID_VECINDARIO",
     staffVar: "STAFF_EMAIL_VECINDARIO",
-    seats: 30, // assumption
-    // PROVISIONAL: same hours as Las Palmas until the client sends the real ones
-    hours: { 0: [["13:00", "17:00"]], 1: [], 2: [["13:00", "17:00"], ["20:00", "23:00"]], 3: [["13:00", "17:00"], ["20:00", "23:00"]],
-             4: [["13:00", "16:30"], ["20:00", "23:00"]], 5: [["13:00", "16:30"], ["20:00", "23:00"]], 6: [["13:00", "17:00"], ["20:00", "23:00"]] }
+    seats: 44, // capacity given by the client (2026-11-22)
+    // Real hours given by the client: Thursday to Monday 12:00-16:30 and 19:00-23:00; closed Tuesday and Wednesday. Must match js/data.js.
+    hours: { 0: [["12:00", "16:30"], ["19:00", "23:00"]], 1: [["12:00", "16:30"], ["19:00", "23:00"]], 2: [], 3: [],
+             4: [["12:00", "16:30"], ["19:00", "23:00"]], 5: [["12:00", "16:30"], ["19:00", "23:00"]], 6: [["12:00", "16:30"], ["19:00", "23:00"]] }
   }
 };

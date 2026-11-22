@@ -82,7 +82,7 @@
   if (vk) {
     const v = D.venues[vk];
     $("#v-address").innerHTML = v.address ? esc(v.address) : '<span class="badge todo">Dirección por confirmar</span>';
-    $("#v-phone").innerHTML = v.phone ? `<a href="tel:${v.phone.replace(/\s/g, "")}">${v.phone}</a>` : (v.comingSoon ? 'Lo anunciaremos con la apertura' : '<span class="badge todo">Teléfono por confirmar</span>');
+    $("#v-phone").innerHTML = v.phone ? `<a href="tel:${v.phone.replace(/\s/g, "")}">${v.phone}</a>` : (v.comingSoon ? 'Lo anunciaremos con la apertura' : '<a href="https://wa.me/34656441966" target="_blank" rel="noopener">Escríbenos por WhatsApp</a>');
     $("#v-hours").innerHTML = hoursHTML(v);
     $("#v-services").innerHTML = v.services.length ? v.services.map((s) => `<li>${esc(s)}</li>`).join("") : '<li class="badge todo">Servicios por confirmar</li>';
     $("#v-pay").textContent = v.payments || "Por confirmar";
