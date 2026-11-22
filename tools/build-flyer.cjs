@@ -1,4 +1,4 @@
-// Promo flyer (A5, front + back) for both venues, generated from js/data.js. Usage: node tools/build-flyer.cjs -> docs/flyer/flyer-cuartango.html (then print to PDF).
+// Promo flyer (13x18 cm, front + back) for both venues, generated from js/data.js. Usage: node tools/build-flyer.cjs -> docs/flyer/flyer-cuartango.html (then print to PDF).
 const fs = require("fs"), path = require("path"), vm = require("vm");
 const root = path.join(__dirname, "..");
 const QR = require(path.join(root, "media-work/node_modules/qrcode"));
@@ -17,12 +17,12 @@ const hoursLines = (hours) => {
   const qCat = await qr("https://catering.cuartango.com/?utm_source=flyer&utm_medium=qr&utm_campaign=catering");
   const qIg = await qr("https://www.instagram.com/cuartango_argentina/");
   const logoLP = "../../img/logo-menu.jpg", logoVC = "../../img/logo-milaneseria.png";
-  const html = `<!doctype html><html lang="es"><head><meta charset="utf-8"><title>Flyer Cuartango (A5, doble cara)</title>
+  const html = `<!doctype html><html lang="es"><head><meta charset="utf-8"><title>Flyer Cuartango (13x18 cm, doble cara)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap">
 <style>
-@page{size:A5;margin:0}*{box-sizing:border-box}html,body{margin:0;background:#d9d5cc}
+@page{size:130mm 180mm;margin:0}*{box-sizing:border-box}html,body{margin:0;background:#d9d5cc}
 body{font-family:Inter,Arial,sans-serif;color:#2b1d17;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-.page{width:148mm;height:210mm;margin:0 auto 6mm;position:relative;overflow:hidden;display:flex;flex-direction:column;page-break-after:always}
+.page{width:151.67mm;height:210mm;zoom:.857143;margin:0 auto 6mm;position:relative;overflow:hidden;display:flex;flex-direction:column;page-break-after:always}
 .page:last-child{page-break-after:auto}
 .front{background:#000200;color:#fff}
 .logos{display:flex;justify-content:center;align-items:center;gap:6mm;padding:7mm 8mm 2mm}
@@ -83,9 +83,9 @@ h1{font:700 29pt/1.02 "Cormorant Garamond",Georgia,serif;text-align:center;color
 <div class="page back">
   <div class="bh"><div class="t">Dónde encontrarnos</div><div class="s">Reserva, pide para llevar o escríbenos</div></div>
   <div class="venues">
-    <div class="v"><h3>Cuartango · Las Palmas</h3><div class="tag">Parrilla argentina, entrepanes y milanesas</div>
+    <div class="v"><h3>Cuartango Argentina</h3><div class="tag">Las Palmas · parrilla argentina, entrepanes y milanesas</div>
       <div class="ad">${LP.address}</div><div class="ph">${LP.phone}</div><div class="hr">${hoursLines(LP.hours).join("<br>")}</div></div>
-    <div class="v"><h3>Cuartango Milanesería · Vecindario</h3><div class="tag">Milanesas, entrepanes y sándwich de vacío al disco</div>
+    <div class="v"><h3>Cuartango Milanesería</h3><div class="tag">Vecindario · milanesas, entrepanes y sándwich de vacío al disco</div>
       <div class="ad">${VC.address}</div><div class="ph">${VC.phone}</div><div class="hr">${hoursLines(VC.hours).join("<br>")}</div></div>
   </div>
   <div class="how"><div><b>Catering</b><span>Escanea el QR del frente y pide tu presupuesto</span></div><div><b>Para llevar</b><span>Llama o pasa por cualquiera de los locales</span></div><div><b>Reparto</b><span>Uber Eats y Glovo, a tu puerta</span></div></div>
