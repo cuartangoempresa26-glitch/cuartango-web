@@ -27,7 +27,7 @@ window.CUARTANGO = {
       name: "Cuartango Milanesería Vecindario",
       city: "Vecindario (Santa Lucía de Tirajana)",
       address: "C. Granada 22, Balos, Vecindario", // postal code and exact municipality to confirm
-      phone: null,   // TODO
+      phone: "+34 699 081 213", // móvil del local (indicado por el cliente 2026-11-22)
       maps: "https://www.google.com/maps/search/?api=1&query=Calle+Granada+22+Balos+Vecindario",
       mapEmbed: "https://www.google.com/maps?q=Calle+Granada+22+Balos+Vecindario&output=embed",
       // Real hours given by the client (2026-11-22): Thursday to Monday 12:00-16:30 and 19:00-23:00; closed Tuesday and Wednesday.

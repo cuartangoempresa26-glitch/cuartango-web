@@ -22,7 +22,7 @@ export const VENUES = {
   "vecindario": {
     name: "Cuartango Milanesería Vecindario",
     address: "C. Granada 22, Balos, Vecindario",
-    phone: null,
+    phone: "+34 699 081 213",
     calendarVar: "CALENDAR_ID_VECINDARIO",
     staffVar: "STAFF_EMAIL_VECINDARIO",
     seats: 44, // capacity given by the client (2026-11-22)
