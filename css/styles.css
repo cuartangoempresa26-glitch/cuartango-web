@@ -521,11 +521,6 @@ nav.main{margin-left:auto}
 .mobilebar{display:none!important}
 @media(max-width:860px){body{padding-bottom:0}.wa{bottom:18px}}
 
-/* Vecindario: photo hero (top half of the venue photo) */
-.hero.has-photo{background:#2b1d17 url(../img/vecindario-local.jpg) center 30%/cover no-repeat;min-height:min(72vh,560px);display:flex;align-items:center;color:#f6efe4}
-.hero.has-photo:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(28,19,15,.42),rgba(28,19,15,.68))}
-.hero.has-photo .wrap{position:relative;z-index:2}
-.hero.has-photo h1{color:#fff}
-.hero.has-photo p.slogan{color:#f6efe4}
-.hero.has-photo .btn.ghost{color:#f6efe4;border-color:#f6efe4}
-.hero.has-photo .btn.ghost:hover{background:#f6efe4;color:var(--walnut)}
+/* Vecindario: photo banner under the header (top half of the venue photo; the neon sign stays visible) */
+.vc-photo{background:#2b1d17}
+.vc-photo img{display:block;width:100%;max-width:1280px;margin:0 auto;height:auto;max-height:460px;object-fit:cover;object-position:center 20%}
