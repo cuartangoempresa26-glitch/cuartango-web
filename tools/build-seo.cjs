@@ -160,7 +160,7 @@ const pages = {
     ld: [organization, restaurant('las-palmas', '/las-palmas', { image: [SITE + '/img/las-palmas-sirviendo.jpg', SITE + '/img/las-palmas-parrillada.jpg'] })] },
   'vecindario.html': { path: '/vecindario', name: 'Vecindario', title: 'Cuartango Milanesería Vecindario | Milanesas y entrepanes argentinos',
     desc: 'Milanesas argentinas, entrepanes artesanos y sándwich de vacío al disco en Vecindario (C. Granada 22, Balos): carta, horario y reservas online.',
-    img: 'img/las-palmas-parrillada.jpg', about: aboutVC, faq: faqVC, ld: [organization, restaurant('vecindario', '/vecindario')] },
+    img: 'img/vecindario-local.jpg', about: aboutVC, faq: faqVC, ld: [organization, restaurant('vecindario', '/vecindario', { image: [SITE + '/img/vecindario-local.jpg'] })] },
   'catering.html': { path: '/catering', name: 'Catering', title: 'Catering argentino en Gran Canaria | ' + BRAND,
     desc: `Catering argentino personalizado con parrillero y parrilla in situ en Gran Canaria: bodas, cumpleaños y eventos. Menús desde ${cheapest} € por persona.`,
     img: 'img/media/costillar-cruz.jpg', faq: faqCatering, ld: [organization, cateringService] },
