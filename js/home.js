@@ -14,7 +14,7 @@
       const v = D.venues[k], h = H.venues[k];
       const open = (CT.openStatus && CT.openStatus(v)) || '<span class="badge">Horario próximamente</span>';
       return `<article class="vpanel" data-v="${k}" tabindex="0" aria-label="${esc(h.tag)}">
-        <div class="vp-bg${h.photo ? "" : " nophoto"}"${h.photo ? ` style="background-image:url('${h.photo}')"` : ""}></div>
+        <div class="vp-bg${h.photo ? "" : " nophoto"}"${h.photo ? ` style="background-image:url('${h.photo}')${h.photoPos ? `;background-position:${h.photoPos}` : ""}"` : ""}></div>
         ${h.video && playVideo ? `<video class="vp-video" muted loop playsinline autoplay preload="metadata" poster="${h.photo}" aria-hidden="true"><source src="${h.video}" type="video/mp4"></video>` : ""}
         <div class="vp-shade"></div>
         <div class="vp-in">

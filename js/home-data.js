@@ -12,7 +12,7 @@ window.HOME = {
     "vecindario": {
       tag: "Cuartango Milanesería · Vecindario",
       title: "Milanesas y entrepanes con alma argentina",
-      photo: null, // photo to come
+      photo: "img/vecindario-mural.jpg", photoPos: "50% 24%", // mural del local (Cuartango Milanesería)
       chips: ["Milanesas", "Entrepanes", "Sándwich de vacío al disco", "Terraza cubierta", "Sin parrilla"],
       body: "En Cuartango Milanesería, en Vecindario, encontrarás el mismo ADN argentino en un formato más ágil: milanesas generosas, entrepanes artesanos y el sándwich de vacío al disco, con la calidad de siempre. Aquí no hay parrilla, pero sí el sabor de casa. Perfecto para una comida de calidad sin complicaciones, para compartir en familia o llevar."
     }
