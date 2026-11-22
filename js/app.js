@@ -86,13 +86,10 @@
     $("#v-hours").innerHTML = hoursHTML(v);
     $("#v-services").innerHTML = v.services.length ? v.services.map((s) => `<li>${esc(s)}</li>`).join("") : '<li class="badge todo">Servicios por confirmar</li>';
     $("#v-pay").textContent = v.payments || "Por confirmar";
-    // Map loads only on click (privacy + speed) and is sandboxed so Google's consent page cannot navigate the whole site away.
-    $("#v-map").innerHTML = v.mapEmbed
-      ? `<div class="map-facade card"><p><strong>${esc(v.address)}</strong></p><p class="muted">El mapa de Google se carga al pulsar.</p>
-         <button class="btn ghost" id="map-load" type="button">Ver mapa</button> <a class="btn ghost" href="${v.maps}" target="_blank" rel="noopener">Cómo llegar</a></div>`
+    // No embedded map (its own "Open in Maps" button did not open Maps from inside the page): one clear button that opens Google Maps in a new tab.
+    $("#v-map").innerHTML = v.maps
+      ? `<div class="card"><p><strong>${esc(v.address)}</strong></p><p><a class="btn" href="${v.maps}" target="_blank" rel="noopener">Cómo llegar en Google Maps</a></p></div>`
       : '<div class="card muted">El mapa aparecerá cuando tengamos la dirección.</div>';
-    const ml2 = $("#map-load");
-    if (ml2) ml2.addEventListener("click", () => { $(".map-facade").outerHTML = `<iframe class="map" title="Mapa ${esc(v.name)}" src="${v.mapEmbed}" sandbox="allow-scripts allow-same-origin allow-popups allow-forms" referrerpolicy="no-referrer-when-downgrade"></iframe><p><a class="btn ghost" href="${v.maps}" target="_blank" rel="noopener">Cómo llegar</a></p>`; });
     if (v.comingSoon) { $("#v-book").outerHTML = SOON; const ev = $("#v-event"); if (ev) ev.remove(); } else $("#v-book").href = "reservas.html?local=" + vk;
     $("#v-menu").href = "menu.html?local=" + vk;
     const o = v.comingSoon ? {} : (v.order || {}), ob = $("#v-order");

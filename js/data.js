@@ -15,7 +15,6 @@ window.CUARTANGO = {
       address: "C. José Franchy Roca 9, 35007 Las Palmas de Gran Canaria",
       phone: "+34 656 441 966",
       maps: "https://www.google.com/maps/search/?api=1&query=C.+Jos%C3%A9+Franchy+Roca+9+35007+Las+Palmas+de+Gran+Canaria",
-      mapEmbed: "https://www.google.com/maps?q=C.+Jos%C3%A9+Franchy+Roca+9+35007+Las+Palmas+de+Gran+Canaria&output=embed",
       // 0=Sunday ... 6=Saturday. Times in Atlantic/Canary. Source: Google Maps listing, checked 2026-10-17.
       hours: { 0: [["13:00","17:00"]], 1: [], 2: [["13:00","17:00"],["20:00","23:00"]], 3: [["13:00","17:00"],["20:00","23:00"]],
                4: [["13:00","16:30"],["20:00","23:00"]], 5: [["13:00","16:30"],["20:00","23:00"]], 6: [["13:00","17:00"],["20:00","23:00"]] },
@@ -29,7 +28,6 @@ window.CUARTANGO = {
       address: "C. Granada 22, 35110 Vecindario (Balos)", // postal code confirmed on Google Maps (2026-11-22)
       phone: "+34 699 081 213", // móvil del local (indicado por el cliente 2026-11-22)
       maps: "https://www.google.com/maps/search/?api=1&query=Calle+Granada+22+Balos+Vecindario",
-      mapEmbed: "https://www.google.com/maps?q=Calle+Granada+22+Balos+Vecindario&output=embed",
       // Real hours given by the client (2026-11-22): Thursday to Monday 12:00-16:30 and 19:00-23:00; closed Tuesday and Wednesday.
       hours: { 0: [["12:00","16:30"],["19:00","23:00"]], 1: [["12:00","16:30"],["19:00","23:00"]], 2: [], 3: [],
                4: [["12:00","16:30"],["19:00","23:00"]], 5: [["12:00","16:30"],["19:00","23:00"]], 6: [["12:00","16:30"],["19:00","23:00"]] },
