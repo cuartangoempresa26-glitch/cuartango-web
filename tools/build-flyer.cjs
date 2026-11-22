@@ -17,7 +17,7 @@ const hoursLines = (hours) => {
   const qCat = await qr("https://catering.cuartango.com/?utm_source=flyer&utm_medium=qr&utm_campaign=catering");
   const qIg = await qr("https://www.instagram.com/cuartango_argentina/");
   const qWeb = await qr("https://cuartango.com/?utm_source=flyer&utm_medium=qr&utm_campaign=web");
-  const logoLP = "../../img/logo-menu.jpg", logoVC = "../../img/logo-milaneseria.png";
+  const logoLP = "../../img/logo-menu-trim.png", logoVC = "../../img/logo-milaneseria.png";
   const html = `<!doctype html><html lang="es"><head><meta charset="utf-8"><title>Flyer Cuartango (13x18 cm, doble cara)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap">
 <style>
@@ -27,17 +27,17 @@ body{font-family:Inter,Arial,sans-serif;color:#2b1d17;-webkit-print-color-adjust
 .page:last-child{page-break-after:auto}
 .front{background:#000200;color:#fff}
 .logos{display:flex;justify-content:center;align-items:center;gap:6mm;padding:5mm 8mm 1mm}
-.logos img{height:20mm;width:auto;mix-blend-mode:lighten}
+.logos img{height:23mm;width:auto;mix-blend-mode:lighten}
 .logos .sep{width:.3mm;height:16mm;background:#b08d57}
-.kick{font:600 7.6pt Inter;letter-spacing:.3em;text-transform:uppercase;color:#d8c3a0;text-align:center;margin-top:2mm}
+.kick{font:600 8.2pt Inter;letter-spacing:.3em;text-transform:uppercase;color:#d8c3a0;text-align:center;margin-top:2mm}
 h1{font:700 26pt/1.02 "Cormorant Garamond",Georgia,serif;text-align:center;color:#e9c46a;margin:2mm 8mm 0;letter-spacing:.01em}
-.sub{font:500 9.6pt/1.3 Inter;text-align:center;color:#f6efe4;margin:2mm 10mm 0}
+.sub{font:600 10.6pt/1.3 Inter;text-align:center;color:#fff;margin:2mm 10mm 0}
 .cards{display:grid;grid-template-columns:1fr;gap:2.4mm;margin:3.6mm 9mm 0}
 .card{border:.4mm solid #b08d57;border-radius:2.5mm;padding:2.8mm 4mm;background:rgba(246,239,228,.06)}
 .card.hl{background:#a44f27;border-color:#e9c46a}
-.card h2{margin:0;font:800 10.5pt Inter;letter-spacing:.12em;text-transform:uppercase;color:#e9c46a}
+.card h2{margin:0;font:800 11pt Inter;letter-spacing:.12em;text-transform:uppercase;color:#e9c46a}
 .card.hl h2{color:#fff}
-.card p{margin:1mm 0 0;font:400 8.6pt/1.34 Inter;color:#f6efe4}
+.card p{margin:1mm 0 0;font:500 9.8pt/1.34 Inter;color:#fff}
 .card b{color:#fff}
 .price{display:inline-block;margin-top:1.6mm;font:700 9pt Inter;color:#000200;background:#e9c46a;border-radius:1.5mm;padding:.8mm 2.4mm}
 .brands{display:flex;gap:3mm;margin-top:2.4mm;align-items:center}.bd{display:inline-flex;align-items:center;justify-content:center;height:7.2mm;padding:0 3.6mm;border-radius:3.6mm;font:800 10.5pt/1 Inter,Arial,sans-serif;letter-spacing:-.01em}
@@ -48,7 +48,7 @@ h1{font:700 26pt/1.02 "Cormorant Garamond",Georgia,serif;text-align:center;color
 .q{text-align:center}
 .qi{width:26mm;height:26mm;background:#fff;padding:2mm;border-radius:2mm;margin:0 auto 1.6mm}.qi svg{width:100%;height:100%;display:block}
 .q b{display:block;font:800 8.5pt Inter;letter-spacing:.1em;text-transform:uppercase;color:#e9c46a}
-.q span{display:block;font:400 7.4pt Inter;color:#f6efe4;margin-top:.5mm}
+.q span{display:block;font:500 8.2pt Inter;color:#fff;margin-top:.5mm}
 .flag{display:grid;grid-template-columns:repeat(3,1fr);height:3mm;flex:none}.flag i{background:#3b8ee8}.flag i:nth-child(2){background:#fff}
 /* back */
 .back{background:#faf8f4}
