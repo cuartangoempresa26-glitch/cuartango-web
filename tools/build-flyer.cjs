@@ -25,23 +25,26 @@ body{font-family:Inter,Arial,sans-serif;color:#2b1d17;-webkit-print-color-adjust
 .page{width:151.67mm;height:210mm;zoom:.857143;margin:0 auto 6mm;position:relative;overflow:hidden;display:flex;flex-direction:column;page-break-after:always}
 .page:last-child{page-break-after:auto}
 .front{background:#000200;color:#fff}
-.logos{display:flex;justify-content:center;align-items:center;gap:6mm;padding:7mm 8mm 2mm}
-.logos img{height:23mm;width:auto;mix-blend-mode:lighten}
+.logos{display:flex;justify-content:center;align-items:center;gap:6mm;padding:5mm 8mm 1mm}
+.logos img{height:20mm;width:auto;mix-blend-mode:lighten}
 .logos .sep{width:.3mm;height:16mm;background:#b08d57}
-.kick{font:600 8pt Inter;letter-spacing:.3em;text-transform:uppercase;color:#d8c3a0;text-align:center;margin-top:3mm}
-h1{font:700 29pt/1.02 "Cormorant Garamond",Georgia,serif;text-align:center;color:#e9c46a;margin:3mm 8mm 0;letter-spacing:.01em}
-.sub{font:500 10.5pt/1.35 Inter;text-align:center;color:#f6efe4;margin:3mm 10mm 0}
-.cards{display:grid;grid-template-columns:1fr;gap:3mm;margin:5mm 9mm 0}
-.card{border:.4mm solid #b08d57;border-radius:2.5mm;padding:3.4mm 4.2mm;background:rgba(246,239,228,.06)}
+.kick{font:600 7.6pt Inter;letter-spacing:.3em;text-transform:uppercase;color:#d8c3a0;text-align:center;margin-top:2mm}
+h1{font:700 26pt/1.02 "Cormorant Garamond",Georgia,serif;text-align:center;color:#e9c46a;margin:2mm 8mm 0;letter-spacing:.01em}
+.sub{font:500 9.6pt/1.3 Inter;text-align:center;color:#f6efe4;margin:2mm 10mm 0}
+.cards{display:grid;grid-template-columns:1fr;gap:2.4mm;margin:3.6mm 9mm 0}
+.card{border:.4mm solid #b08d57;border-radius:2.5mm;padding:2.8mm 4mm;background:rgba(246,239,228,.06)}
 .card.hl{background:#a44f27;border-color:#e9c46a}
 .card h2{margin:0;font:800 10.5pt Inter;letter-spacing:.12em;text-transform:uppercase;color:#e9c46a}
 .card.hl h2{color:#fff}
-.card p{margin:1.3mm 0 0;font:400 9pt/1.38 Inter;color:#f6efe4}
+.card p{margin:1mm 0 0;font:400 8.6pt/1.34 Inter;color:#f6efe4}
 .card b{color:#fff}
 .price{display:inline-block;margin-top:1.6mm;font:700 9pt Inter;color:#000200;background:#e9c46a;border-radius:1.5mm;padding:.8mm 2.4mm}
-.qrbar{display:flex;justify-content:center;gap:11mm;margin-top:auto;padding:4mm 8mm 4mm;border-top:.4mm solid #b08d57}
+.brands{display:flex;gap:3mm;margin-top:2.4mm;align-items:center}.bd{display:inline-flex;align-items:center;justify-content:center;height:7.2mm;padding:0 3.6mm;border-radius:3.6mm;font:800 10.5pt/1 Inter,Arial,sans-serif;letter-spacing:-.01em}
+.bd.uber{background:#000;border:.35mm solid #fff;color:#fff}.bd.uber i{font-style:normal;color:#06c167;margin-left:1mm}
+.bd.glovo{background:#ffc244;color:#00a082;text-transform:lowercase;letter-spacing:0}
+.qrbar{display:flex;justify-content:center;gap:11mm;margin-top:auto;padding:3mm 8mm 3mm;border-top:.4mm solid #b08d57}
 .q{text-align:center}
-.qi{width:30mm;height:30mm;background:#fff;padding:2mm;border-radius:2mm;margin:0 auto 1.6mm}.qi svg{width:100%;height:100%;display:block}
+.qi{width:28mm;height:28mm;background:#fff;padding:2mm;border-radius:2mm;margin:0 auto 1.6mm}.qi svg{width:100%;height:100%;display:block}
 .q b{display:block;font:800 8.5pt Inter;letter-spacing:.1em;text-transform:uppercase;color:#e9c46a}
 .q span{display:block;font:400 7.4pt Inter;color:#f6efe4;margin-top:.5mm}
 .flag{display:grid;grid-template-columns:repeat(3,1fr);height:3mm;flex:none}.flag i{background:#3b8ee8}.flag i:nth-child(2){background:#fff}
@@ -67,12 +70,12 @@ h1{font:700 29pt/1.02 "Cormorant Garamond",Georgia,serif;text-align:center;color
 <div class="page front">
   <div class="logos"><img src="${logoLP}" alt="Cuartango"><div class="sep"></div><img src="${logoVC}" alt="Cuartango Milanesería"></div>
   <div class="kick">Cocina argentina · Gran Canaria</div>
-  <h1>Llevamos el sabor de Argentina a tu mesa</h1>
+  <h1>Llevamos el sabor de Argentina<br>a tu mesa</h1>
   <div class="sub">Catering, para llevar y a domicilio: elige cómo disfrutarlo.</div>
   <div class="cards">
     <div class="card hl"><h2>Catering a domicilio</h2><p><b>Cumpleaños y celebraciones especiales.</b> También bodas, reuniones y eventos de empresa. Llevamos la parrilla y al parrillero a tu evento, con un menú pensado a tu medida.</p><span class="price">Desde 40 € por persona · mínimo 25 comensales</span></div>
     <div class="card"><h2>Take away en nuestros locales</h2><p>Pide para llevar en cualquiera de los dos locales, en horario de atención: <b>milanesas, entrepanes, empanadas</b> y más, listos para disfrutar en casa o en la oficina.</p></div>
-    <div class="card"><h2>A domicilio con Uber Eats y Glovo</h2><p>Recibe nuestros platos donde estés, rápido y calentitos, desde las plataformas de reparto.</p></div>
+    <div class="card"><h2>A domicilio con Uber Eats y Glovo</h2><p>Recibe nuestros platos donde estés, rápido y calentitos, desde las plataformas de reparto.</p><div class="brands"><span class="bd uber">Uber<i>Eats</i></span><span class="bd glovo">Glovo</span></div></div>
   </div>
   <div class="qrbar">
     <div class="q"><div class="qi">${qCat}</div><b>Catering</b><span>Menús y presupuesto</span></div>
