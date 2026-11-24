@@ -5,6 +5,7 @@ import { handleReviews } from "./functions/api/reviews.js";
 import { handleAvailability, handleBook, handleCancel, sendReminders } from "./functions/api/booking.js";
 
 import { sendNotices } from "./functions/lib/notices.js";
+import { reviewRedirect } from "./functions/lib/review-link.js";
 
 const notAllowed = (allow) => new Response("Method Not Allowed", { status: 405, headers: { Allow: allow } });
 
@@ -35,6 +36,9 @@ export default {
     if (/^\/nosotros(\.html)?\/?$/.test(url.pathname) && url.hostname === "cuartango.com") return Response.redirect("https://catering.cuartango.com/#nuestra-cocina", 301);
     // the landing page lives on the subdomain only (one canonical address)
     if (/^\/catering-evento(\.html)?\/?$/.test(url.pathname)) return Response.redirect("https://catering.cuartango.com/", 301);
+    // Google review cards (NFC + QR): /resena/las-palmas and /resena/vecindario
+    const rv = url.pathname.match(/^\/resena\/(las-palmas|vecindario)\/?$/);
+    if (rv) return reviewRedirect(rv[1], env, url.searchParams.get("src"));
     // QR codes printed in the venues point here, so the destination can change without reprinting.
     const qr = { "/qr/las-palmas": "/menu?local=las-palmas", "/qr/vecindario": "/menu?local=vecindario", "/qr": "/menu" }[url.pathname.replace(/\/$/, "")];
     if (qr) return Response.redirect(url.origin + qr + (qr.includes("?") ? "&" : "?") + "utm_source=qr", 302);
