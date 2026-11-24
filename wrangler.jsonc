@@ -14,6 +14,8 @@
     "CONTACT_TO": "info@cuartango.com",
     "STAFF_EMAIL_LAS_PALMAS": "reservas.laspalmas@cuartango.com",
     "STAFF_EMAIL_VECINDARIO": "reservas.vecindario@cuartango.com",
+    "REVIEW_URL_LAS_PALMAS": "https://g.page/r/CTMYo8ROxulqEBM/review",
+    "REVIEW_URL_VECINDARIO": "https://g.page/r/CQu2LjdJet8CEBM/review",
     "MAIL_FROM":"Cuartango Web <web@cuartango.com>",
     "GOOGLE_SERVICE_ACCOUNT_EMAIL": "reservas-web@cuartango-web.iam.gserviceaccount.com",
     "CALENDAR_ID_LAS_PALMAS": "5d26b4a318cd7b22873b123992a7a0c5e60594dc0bd0be7b8c7f42c63cb2ad44@group.calendar.google.com",
